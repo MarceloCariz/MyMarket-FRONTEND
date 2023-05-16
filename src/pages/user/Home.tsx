@@ -1,11 +1,23 @@
+import {useEffect} from 'react'
 import {Box, Typography} from '@mui/material';
+import { ProductsContainer } from '../../components';
+import { useAppDispatch } from '../../hooks';
+import { getProducts } from '../../store/slices/product/thunk';
 
 
 const Home = () => {
+
+    const dispatch =  useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getProducts());
+    }, [])
+
     return (
         <Box >
-            <Box marginTop={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
-                <Typography>Home</Typography>
+            <Box width={"100%"} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                <Typography marginBottom={8}>Productos cercanos</Typography>
+                <ProductsContainer/>
             </Box>
         </Box>
     )
