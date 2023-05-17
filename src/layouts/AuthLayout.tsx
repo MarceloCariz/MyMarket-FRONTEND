@@ -23,10 +23,9 @@ const AuthPageLayout = () => {
     },[token])
 
     useEffect(()=>{
-        if(user?.roles.includes(RolesEnum.USER)){
-            navigate("/home")
-            return;
-        }
+        if(user?.roles.includes(RolesEnum.USER)) return navigate("/home");
+
+        if(user?.roles.includes(RolesEnum.SHOP)) return navigate("/shop");
         // if(user?.role === "usuario"){
         //     navigate("/home")
         //     return;

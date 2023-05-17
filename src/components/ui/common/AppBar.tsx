@@ -33,6 +33,11 @@ export const AppBar = () => {
                                 </Typography>
                             </Link>
                         </Box>
+                        <Box display={"flex"} flexGrow={1} alignItems={"center"}>
+                                <Typography variant="h5"   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
+                                    Dirección del usuario
+                                </Typography>
+                        </Box>
 
 
                         <Box sx={{flexGrow: 0}} display={"flex"} alignItems={"center"}>

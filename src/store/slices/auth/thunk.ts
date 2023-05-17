@@ -1,7 +1,8 @@
+import { AxiosError } from "axios";
 import mymarketApi from "../../../api/mymarketApi";
 import { toastError } from "../../../components/ui";
 import { AuthI, LoginI } from "../../../interfaces/auth";
-import { setError, setUser, startLogin } from "./authSlice";
+import { logout, setError, setUser, startLogin } from "./authSlice";
 
 
 
@@ -48,16 +49,20 @@ export const getUserByToken = () => {
         }
         try{
             const {data} = await mymarketApi("/auth/revalidate", {headers});
+
             const user: AuthI = {
-                uid: data.id,
+                uid: data.uid,
                 roles: data.roles,
                 username: data.username,
                 token: data.token,
             }
             localStorage.setItem("token", data.token);
-            dispatch(setUser({user}))
+            dispatch(setUser({user, token: data.token}))
         }catch(error){
-            console.log(error)
+            const err = error as AxiosError;
+            if(err.response?.status === 400){
+                dispatch(logout());
+            }
         }
 
     }

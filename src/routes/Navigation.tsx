@@ -5,6 +5,8 @@ import { AuthPageLayout, HomePageLayout } from '../layouts'
 import { routesNoAuthorization } from './routesNoAuthorization'
 import { routesAdmin } from './routesAdmin'
 import { AdminLayout } from '../layouts/AdminLayout'
+import { routesShop } from './routesShop';
+import { ShopLayout } from '../layouts/ShopLayout';
 
 
 
@@ -36,6 +38,23 @@ export const Navigation = () => {
                     <Route  path='/home' element={<HomePageLayout/>}>
                         {
                             routesUsers.map( ({ path, Component , index }) => (
+                                <Route 
+                                    key={ path }
+                                    path={ path }
+                                    element={ <Component /> } 
+                                    index={index}
+                                />
+                            ))
+                        }
+                    </Route>
+                </Routes>
+
+                {/* Protegidas - Shop*/}
+                <Routes>
+                    
+                    <Route  path='/shop' element={<ShopLayout/>}>
+                        {
+                            routesShop.map( ({ path, Component , index }) => (
                                 <Route 
                                     key={ path }
                                     path={ path }

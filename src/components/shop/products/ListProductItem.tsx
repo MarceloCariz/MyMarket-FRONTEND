@@ -1,6 +1,8 @@
-import { Box, Card, CardContent, CardHeader, IconButton, Tooltip, Typography, Button, CardMedia } from "@mui/material";
-import StorefrontIcon from '@mui/icons-material/Storefront';
+import { Box, Card, CardContent,  Typography, Button, CardMedia } from "@mui/material";
 import { ProductI } from "../../../interfaces"
+import { DeleteButton } from "./ActionButtons";
+import { useAppDispatch } from "../../../hooks";
+import { setActiveProduct } from "../../../store/slices/product/productSlice";
 
 
 interface Props {
@@ -9,20 +11,14 @@ interface Props {
 
 export const ListProductItem = ({product}:Props) => {
 
-    const {title,price, stock,  shopName, imgUrl} = product;
+    const dispacth = useAppDispatch();
+    const {title,price, stock,  imgUrl} = product;
+
 
     return (
-        <Box width={"100%"}>
+        <Box component={"div"} onMouseEnter={() => dispacth(setActiveProduct({product}))}  onMouseLeave={() => dispacth(setActiveProduct({product: null}))}
+            width={"100%"} boxShadow={10} borderRadius={4}>
             <Card>
-                <CardHeader  sx={{backgroundColor:'rgb(50, 77, 112)', color: 'white'}} 
-                    title={shopName}
-                    action={<IconButton sx={{pb:1}}>
-                                <Tooltip title="Ir a la tienda">
-                                    <StorefrontIcon htmlColor="white"/>
-                                </Tooltip>
-                            </IconButton>
-                    }
-                />
                 <CardMedia sx={{objectFit:'contain'}} component={"img"} height={"194"} image={imgUrl} alt={`image-${title}`} />
                 <CardContent >
                     <Box display={"flex"} flexDirection={"column"} gap={1}>
@@ -36,10 +32,11 @@ export const ListProductItem = ({product}:Props) => {
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {price.toLocaleString("es-CL",{style: 'currency',currency: "clp"})} </Typography>
                         </Typography>
                     </Box>
-                    <Box marginTop={2} display={"flex"} justifyContent={"center"}>
+                    <Box marginTop={2} display={"flex"} gap={2} justifyContent={"center"}>
                         <Button variant="contained" color="success">
-                            Agregar al carrito
+                            Actualizar
                         </Button>
+                        <DeleteButton/>
                     </Box>
 
                 </CardContent>
