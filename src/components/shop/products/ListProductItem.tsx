@@ -1,6 +1,6 @@
 import { Box, Card, CardContent,  Typography, Button, CardMedia } from "@mui/material";
 import { ProductI } from "../../../interfaces"
-import { DeleteButton } from "./ActionButtons";
+import { DeleteButton, UpdateButton } from "./ActionButtons";
 import { useAppDispatch } from "../../../hooks";
 import { setActiveProduct } from "../../../store/slices/product/productSlice";
 
@@ -33,9 +33,7 @@ export const ListProductItem = ({product}:Props) => {
                         </Typography>
                     </Box>
                     <Box marginTop={2} display={"flex"} gap={2} justifyContent={"center"}>
-                        <Button variant="contained" color="success">
-                            Actualizar
-                        </Button>
+                        <UpdateButton/>
                         <DeleteButton/>
                     </Box>
 
