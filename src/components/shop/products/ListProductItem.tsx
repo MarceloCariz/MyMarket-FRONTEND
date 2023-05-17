@@ -16,7 +16,7 @@ export const ListProductItem = ({product}:Props) => {
 
 
     return (
-        <Box component={"div"} onMouseEnter={() => dispacth(setActiveProduct({product}))}  onMouseLeave={() => dispacth(setActiveProduct({product: null}))}
+        <Box component={"div"} onMouseEnter={() => dispacth(setActiveProduct({product}))}
             width={"100%"} boxShadow={10} borderRadius={4}>
             <Card>
                 <CardMedia sx={{objectFit:'contain'}} component={"img"} height={"194"} image={imgUrl} alt={`image-${title}`} />

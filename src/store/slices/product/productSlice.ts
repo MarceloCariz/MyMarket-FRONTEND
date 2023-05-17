@@ -5,6 +5,7 @@ export interface productState {
     products: ProductI[];
     activeProduct: ProductI | null;
     isOpenModalProductActions:{active: boolean, type: "add" | "edit" | ''};
+    loadingAction: boolean;
 }
 
 
@@ -12,6 +13,7 @@ const initialState : productState  = {
     products: [],
     activeProduct: null,
     isOpenModalProductActions: {active: false, type: ''},
+    loadingAction: false,
 }   
 
 export const productSlice = createSlice({
@@ -31,6 +33,28 @@ export const productSlice = createSlice({
             state.isOpenModalProductActions.type = action.payload.type;
             return state; 
         },
+        startLoading: (state) => {
+            state.loadingAction = true;
+            return state;
+        },
+        addProduct: (state, action) => {
+            state.products = [...state.products, action.payload.product];
+            state.loadingAction = false;
+            state.activeProduct = null;
+            return state;
+        },
+        updateProduct:(state, action) => {
+            state.products = state.products.map((p) => {
+                if(p._id === action.payload.product._id){
+                    p = action.payload.product;
+                    return p;
+                }   
+                return p;
+            });
+            state.loadingAction = false;
+            state.activeProduct = null;
+            return state;
+        },
         removeProduct: (state, action) => {
             state.products = state.products.filter((p) => p._id !== action.payload.id);
             state.activeProduct = null;
@@ -45,7 +69,11 @@ export const productSlice = createSlice({
 export const {
     setProducts,
     setActiveProduct,
+    startLoading,
     toogleModalProductActions,
     //Functions
+    addProduct,
+    updateProduct,
     removeProduct
+
 } = productSlice.actions;

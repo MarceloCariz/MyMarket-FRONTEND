@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { ListProductItem } from "./ListProductItem";
 import { getProductByShop } from '../../../store/slices/product/thunk';
 import { AddButton } from './ActionButtons';
-import { ModalProduct } from './ModalProduct';
+import { ModalProduct } from './modal/ModalProduct';
 
 
 
