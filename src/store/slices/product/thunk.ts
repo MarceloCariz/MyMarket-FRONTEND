@@ -22,7 +22,7 @@ export const getProductByShop = () => {
     return async(dispatch:any, getState:()=> RootState)=>{ 
         try {
             const {user} = getState().auth;
-
+            
             const {data} = await mymarketApi(`product/shop/${user?.uid}`);
             dispatch(setProducts({products: data}));
         } catch (error) {
@@ -30,6 +30,24 @@ export const getProductByShop = () => {
         }
     }
 }
+
+export const getProductByShopUSer = (shopId: string) => {
+    return async(dispatch:any)=>{ 
+        try {
+            
+            const {data} = await mymarketApi(`product/shop/${shopId}`);
+
+            const products = data.map((p:any) => ({...p, shopName: p.shop["shopName"]}))
+
+            dispatch(setProducts({products}));
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
 
 export const createProduct = (values:any, file:any, resetForm: any) => {
     return async(dispatch:any, getState:()=> RootState)=>{ 

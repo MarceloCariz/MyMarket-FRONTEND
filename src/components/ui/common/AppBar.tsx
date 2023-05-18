@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { toogleDrawer } from '../../../store/slices/ui/uiSlice';
 import { logout } from '../../../store/slices/auth/authSlice';
 import { RolesEnum } from '../../../enums';
+import { Cart } from '../..';
 
 
 export const AppBar = () => {
@@ -41,6 +42,7 @@ export const AppBar = () => {
                                 <Typography variant="h5" display={{xs:"none", sm:"flex"}}   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
                                     Dirección del usuario
                                 </Typography>
+                                <Cart/>
                             </Box>)
                         }
 

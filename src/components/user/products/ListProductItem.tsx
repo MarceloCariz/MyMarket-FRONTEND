@@ -1,6 +1,8 @@
 import { Box, Card, CardContent, CardHeader, IconButton, Tooltip, Typography, Button, CardMedia } from "@mui/material";
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { ProductI } from "../../../interfaces"
+import { AddToCartButton } from "./AddToCartButton";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 interface Props {
@@ -9,14 +11,18 @@ interface Props {
 
 export const ListProductItem = ({product}:Props) => {
 
-    const {title,price, stock,  shopName, imgUrl} = product;
+    const {title,price, stock,  shopName, imgUrl, shopId} = product;
+    const navigate = useNavigate();
+
+    const {shopId:params} = useParams();
 
     return (
-        <Box width={"100%"}>
+        <Box width={"100%"} boxShadow={5} borderRadius={5}>
             <Card>
-                <CardHeader  sx={{backgroundColor:'rgb(50, 77, 112)', color: 'white'}} 
+
+                <CardHeader   sx={{backgroundColor:'rgb(50, 77, 112)', color: 'white', display: params ? "none" : "flex" }} 
                     title={shopName}
-                    action={<IconButton sx={{pb:1}}>
+                    action={<IconButton onClick={() => navigate(`shop/${shopId}`)} sx={{pb:1}}>
                                 <Tooltip title="Ir a la tienda">
                                     <StorefrontIcon htmlColor="white"/>
                                 </Tooltip>
@@ -37,9 +43,7 @@ export const ListProductItem = ({product}:Props) => {
                         </Typography>
                     </Box>
                     <Box marginTop={2} display={"flex"} justifyContent={"center"}>
-                        <Button variant="contained" color="success">
-                            Agregar al carrito
-                        </Button>
+                        <AddToCartButton product={product} />
                     </Box>
 
                 </CardContent>

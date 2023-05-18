@@ -8,6 +8,7 @@ import { getUserByToken } from "../store/slices/auth/thunk";
 import 'react-toastify/dist/ReactToastify.css';
 import { AppBar, DrawerUi } from "../components";
 import { RolesEnum } from "../enums";
+import { setCart } from "../store/slices/cart/cartSlice";
 
 
 
@@ -15,6 +16,7 @@ const HomePageLayout = () => {
     const token = localStorage.getItem("token");
     const dispatch = useAppDispatch();
     const {user} = useAppSelector(state => state.auth);
+    const {cart } = useAppSelector(state => state.cart);
 
     const navigate = useNavigate();
 
@@ -28,6 +30,13 @@ const HomePageLayout = () => {
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.USER)) return navigate("/");
     }, [user])
+
+    useEffect(() => {
+        const cartStorage = localStorage.getItem("cart");
+        if(cartStorage){
+            dispatch(setCart({cart: JSON.parse(cartStorage) } ));
+        }
+    },[])
 
     return (
         <> 
