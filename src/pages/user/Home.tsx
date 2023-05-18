@@ -1,13 +1,14 @@
 import {useEffect} from 'react'
-import {Box, Typography} from '@mui/material';
+import {Box, CircularProgress, Typography} from '@mui/material';
 import { ProductsContainer } from '../../components';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getProducts } from '../../store/slices/product/thunk';
 
 
 const Home = () => {
 
     const dispatch =  useAppDispatch();
+    const {loadingProducts} = useAppSelector(state => state.product);
 
     useEffect(() => {
         dispatch(getProducts());
@@ -17,7 +18,17 @@ const Home = () => {
         <Box >
             <Box width={"100%"} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
                 <Typography marginBottom={5} variant='h5'>Productos cercanos</Typography>
-                <ProductsContainer/>
+                {
+                    loadingProducts ? (
+                        <Box display={"flex"} justifyContent={"center"}>
+                            <CircularProgress />
+                        </Box>
+                    ) : 
+                    (
+                        <ProductsContainer/>
+
+                    )
+                }
             </Box>
         </Box>
     )

@@ -8,6 +8,7 @@ import { addProduct, removeProduct, setProducts, startLoading, startLoadingProdu
 export const getProducts = () => {
     return async(dispatch:any)=>{ 
         try {
+            dispatch(startLoadingProducts());
             
             const {data} = await mymarketApi('product/all');
 
