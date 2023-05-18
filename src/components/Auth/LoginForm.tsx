@@ -23,7 +23,7 @@ export const LoginForm = () => {
     // const navigate = useNavigate();
 
     const handleLogin = ({email, password}:LoginI) => {
-        dispatch(SignIn({email, password}));
+        dispatch(SignIn({email: email.toLowerCase(), password}));
     }
 
 
