@@ -7,6 +7,7 @@ import { getUserByToken } from "../store/slices/auth/thunk";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { AppBar, DrawerUi } from "../components";
+import { RolesEnum } from "../enums";
 
 
 
@@ -24,7 +25,9 @@ const HomePageLayout = () => {
         dispatch(getUserByToken());
     },[])
 
-
+    useEffect(() => {
+        if(user && !user?.roles.includes(RolesEnum.USER)) return navigate("/");
+    }, [user])
 
     return (
         <> 

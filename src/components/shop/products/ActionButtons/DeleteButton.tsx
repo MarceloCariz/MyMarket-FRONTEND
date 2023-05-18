@@ -21,9 +21,9 @@ export const DeleteButton = () => {
 
     return (
         <>
-            <Dialog open={open} fullScreen={fullScreen} onClose={() => setOpen(false)}>
+            <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle>
-                    {`Confirmar eliminacion del producto: ${activeProduct?.title}` }
+                    {`Confirmar eliminación del producto: ${activeProduct?.title}` }
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={() => setOpen(false)}>

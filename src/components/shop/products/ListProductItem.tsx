@@ -17,11 +17,11 @@ export const ListProductItem = ({product}:Props) => {
 
     return (
         <Box component={"div"} onMouseEnter={() => dispacth(setActiveProduct({product}))}
-            width={"100%"} boxShadow={10} borderRadius={4}>
+            width={"100%"}   boxShadow={10} borderRadius={4}>
             <Card>
-                <CardMedia sx={{objectFit:'contain'}} component={"img"} height={"194"} image={imgUrl} alt={`image-${title}`} />
+                <CardMedia sx={{objectFit:'contain'}} component={"img"} height={"194"}  image={imgUrl} alt={`image-${title}`} />
                 <CardContent >
-                    <Box display={"flex"} flexDirection={"column"} gap={1}>
+                    <Box display={"flex"}  flexDirection={"column"} gap={1} >
                         <Typography variant="h5">Nombre: 
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {title}</Typography>
                         </Typography>
@@ -32,7 +32,7 @@ export const ListProductItem = ({product}:Props) => {
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {price.toLocaleString("es-CL",{style: 'currency',currency: "clp"})} </Typography>
                         </Typography>
                     </Box>
-                    <Box marginTop={2} display={"flex"} gap={2} justifyContent={"center"}>
+                    <Box marginTop={2}  display={"flex"} gap={2} justifyContent={"center"}>
                         <UpdateButton/>
                         <DeleteButton/>
                     </Box>

@@ -45,10 +45,10 @@ export const ModalProduct = () => {
 
 
     const validationSchemaAdd = Yup.object({
-        title: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
-        description: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(50, "No debe tener mas de 50 caracteres").required("Este campo es obligatorio"),
-        price: Yup.number().typeError("El precio debe ser un numero").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
-        stock: Yup.number().typeError("El stock debe ser un numero").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
+        title: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(20, "No debe tener más de 20 caracteres").required("Este campo es obligatorio"),
+        description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(50, "No debe tener más de 50 caracteres").required("Este campo es obligatorio"),
+        price: Yup.number().typeError("El precio debe ser un número").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
+        stock: Yup.number().typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
     })
 
 
@@ -60,10 +60,10 @@ export const ModalProduct = () => {
     }
 
     const validationSchemaEdit = Yup.object({
-        title: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(20, "No debe tener mas de 20 caracteres").required("Este campo es obligatorio"),
-        description: Yup.string().min(3,"Debe ser de un minimo de 3 caracteres").max(70, "No debe tener mas de 50 caracteres"),
-        price: Yup.number().typeError("El precio debe ser un numero").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
-        stock: Yup.number().typeError("El stock debe ser un numero").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
+        title: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(20, "No debe tener más de 20 caracteres").required("Este campo es obligatorio"),
+        description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(70, "No debe tener más de 50 caracteres"),
+        price: Yup.number().typeError("El precio debe ser un número").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
+        stock: Yup.number().typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
     })
 
 
@@ -122,7 +122,7 @@ export const ModalProduct = () => {
                     {
                         ({handleSubmit}) => (
                             <Form>
-                                <Box   width={400} display={"flex"} flexDirection={"column"} gap={2}>
+                                <Box   width={{xs:"100%",sm:"400px"}} display={"flex"} flexDirection={"column"} gap={2}>
 
                                     <Box display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"}>
                                         {imagenInfo !== null &&(
@@ -132,7 +132,7 @@ export const ModalProduct = () => {
                                         }
                                         <Typography  sx={{display:"flex", alignItems:"center", cursor:"pointer"}}  component={"label"}  htmlFor="file">
                                             <AddPhotoAlternateIcon fontSize='large'/>
-                                            {selectedFile !== null ? "Actualizar imagen" : "Haz click aquí para subir tu imagen"}</Typography>
+                                            {selectedFile !== null ? "Actualizar imagen" : "Haz clic aquí para subir tu imagen"}</Typography>
 
                                         
                                         <Input  style={{display: 'none'}} id="file"  type="file" onChange={onChangeInpuFile} />

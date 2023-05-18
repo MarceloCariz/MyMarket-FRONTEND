@@ -1,6 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom'
 import { Box , Typography, IconButton, AppBar as AppBarMui, Toolbar,Container, Tooltip, Avatar} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { toogleDrawer } from '../../../store/slices/ui/uiSlice';
@@ -33,11 +34,16 @@ export const AppBar = () => {
                                 </Typography>
                             </Link>
                         </Box>
-                        <Box display={"flex"} flexGrow={1} alignItems={"center"}>
-                                <Typography variant="h5"   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
+                        {
+                            user?.roles.includes(RolesEnum.USER) && (
+                            <Box  display={"flex"} flexGrow={{xs:"0",md:"1"}} alignItems={"center"}>
+                                <LocationOnIcon sx={{display:{xs:"none", md:"flex"}}} htmlColor='rgb(235, 0, 20)'/>
+                                <Typography variant="h5" display={{xs:"none", sm:"flex"}}   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
                                     Dirección del usuario
                                 </Typography>
-                        </Box>
+                            </Box>)
+                        }
+
 
 
                         <Box sx={{flexGrow: 0}} display={"flex"} alignItems={"center"}>

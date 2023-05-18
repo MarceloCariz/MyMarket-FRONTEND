@@ -23,7 +23,7 @@ export const ConfirmButton = ({handleSubmit}:Props) => {
 
     return (
         <>
-            <Dialog open={open} fullScreen={fullScreen} onClose={() => setOpen(false)}>
+            <Dialog open={open}  onClose={() => setOpen(false)}>
                 <DialogTitle>
                     {`Confirmar actualización del producto: ${activeProduct?.title}` }
                 </DialogTitle>

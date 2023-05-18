@@ -16,7 +16,7 @@ const Home = () => {
     return (
         <Box >
             <Box width={"100%"} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
-                <Typography marginBottom={8}>Productos cercanos</Typography>
+                <Typography marginBottom={5} variant='h5'>Productos cercanos</Typography>
                 <ProductsContainer/>
             </Box>
         </Box>

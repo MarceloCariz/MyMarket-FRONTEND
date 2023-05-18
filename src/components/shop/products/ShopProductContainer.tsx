@@ -32,12 +32,11 @@ export const ShopProductContainer = () => {
             <Box>
                 <AddButton/>
             </Box>
-            <Grid marginTop={2} container width={"100%"} display={'flex'} spacing={2} >
+            <Grid marginTop={2} container  display={'flex'} spacing={2} >
                 {
                     products.length > 0 && products.map((product) => (
-                        <Grid  key={product._id} item  xs={12} md={4} lg={3}>
+                        <Grid  key={product._id} item  xs={12} sm={6} md={4} lg={3} xl={2}>
                             <ListProductItem  product={product}/>
-
                         </Grid>
                     ))
                 }

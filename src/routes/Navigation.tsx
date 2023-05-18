@@ -7,6 +7,7 @@ import { routesAdmin } from './routesAdmin'
 import { AdminLayout } from '../layouts/AdminLayout'
 import { routesShop } from './routesShop';
 import { ShopLayout } from '../layouts/ShopLayout';
+import ErrorPage from '../pages/ErrorPage';
 
 
 
@@ -30,10 +31,8 @@ export const Navigation = () => {
                             ))
                         }
                     </Route>
-                </Routes>
 
                 {/* Protegidas - usuarios*/}
-                <Routes>
                     
                     <Route  path='/home' element={<HomePageLayout/>}>
                         {
@@ -47,10 +46,8 @@ export const Navigation = () => {
                             ))
                         }
                     </Route>
-                </Routes>
 
                 {/* Protegidas - Shop*/}
-                <Routes>
                     
                     <Route  path='/shop' element={<ShopLayout/>}>
                         {
@@ -64,24 +61,10 @@ export const Navigation = () => {
                             ))
                         }
                     </Route>
+                    <Route path='*' element={<ErrorPage/>}/>
                 </Routes>
 
-                                {/* Protegidas - Admin*/}
-                {/* <Routes>
-                    
-                    <Route  path='/dashboard' element={<AdminLayout/>}>
-                        {
-                            routesAdmin.map( ({ path, Component , index }) => (
-                                <Route 
-                                    key={ path }
-                                    path={ path }
-                                    element={ <Component /> } 
-                                    index={index}
-                                />
-                            ))
-                        }
-                    </Route>
-                </Routes> */}
+
 
 
             </BrowserRouter>

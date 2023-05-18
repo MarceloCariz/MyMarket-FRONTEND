@@ -27,7 +27,7 @@ const ShopLayout = () => {
 
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.SHOP)) return navigate("/");
-    }, [])
+    }, [user])
 
 
 
