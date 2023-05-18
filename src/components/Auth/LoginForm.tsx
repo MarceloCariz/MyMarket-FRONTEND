@@ -8,6 +8,7 @@ import { MyTextInput } from "../formik/MyTextInput";
 import { useAppDispatch} from "../../hooks/reduxHook";
 import { SignIn } from "../../store/slices/auth/thunk";
 import { LoginI } from "../../interfaces";
+import logo from '../../assets/Logo.png';
 
 
 
@@ -35,7 +36,8 @@ export const LoginForm = () => {
     
     return (
         <Box width={{md:"500px"}} sx={{backgroundColor: "white"}} borderRadius={3} boxShadow={10} gap={5} paddingY={5} paddingX={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
-            <Box>
+            <Box display={"flex"} flexDirection={"column"} alignItems={"center"} gap={2} justifyContent={"center"} >
+                <img src={logo} alt="Logo app"  className='logo'/>
                 <Typography variant="h4">Inicio de Sesión</Typography>
             </Box>
             <Formik

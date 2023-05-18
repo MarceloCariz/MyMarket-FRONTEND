@@ -6,6 +6,7 @@ export interface productState {
     activeProduct: ProductI | null;
     isOpenModalProductActions:{active: boolean, type: "add" | "edit" | ''};
     loadingAction: boolean;
+    loadingProducts: boolean;
 }
 
 
@@ -14,6 +15,7 @@ const initialState : productState  = {
     activeProduct: null,
     isOpenModalProductActions: {active: false, type: ''},
     loadingAction: false,
+    loadingProducts: false,
 }   
 
 export const productSlice = createSlice({
@@ -22,6 +24,7 @@ export const productSlice = createSlice({
     reducers:{
         setProducts: (state, action) => {
             state.products = action.payload.products;
+            state.loadingProducts = false;
             return state;
         },
         setActiveProduct: (state, action) => {
@@ -35,6 +38,10 @@ export const productSlice = createSlice({
         },
         startLoading: (state) => {
             state.loadingAction = true;
+            return state;
+        },
+        startLoadingProducts: (state) => {
+            state.loadingProducts = true;
             return state;
         },
         addProduct: (state, action) => {
@@ -70,6 +77,7 @@ export const {
     setProducts,
     setActiveProduct,
     startLoading,
+    startLoadingProducts,
     toogleModalProductActions,
     //Functions
     addProduct,

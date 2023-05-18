@@ -2,7 +2,7 @@ import mymarketApi from "../../../api/mymarketApi";
 import { toastError, toastSuccess } from "../../../components";
 import { ProductI } from "../../../interfaces";
 import { RootState } from "../../store";
-import { addProduct, removeProduct, setProducts, startLoading, updateProduct } from "./productSlice";
+import { addProduct, removeProduct, setProducts, startLoading, startLoadingProducts, toogleModalProductActions, updateProduct } from "./productSlice";
 
 
 export const getProducts = () => {
@@ -34,7 +34,7 @@ export const getProductByShop = () => {
 export const getProductByShopUSer = (shopId: string) => {
     return async(dispatch:any)=>{ 
         try {
-            
+            dispatch(startLoadingProducts());
             const {data} = await mymarketApi(`product/shop/${shopId}`);
 
             const products = data.map((p:any) => ({...p, shopName: p.shop["shopName"]}))
@@ -72,7 +72,7 @@ export const createProduct = (values:any, file:any, resetForm: any) => {
 
         } catch (error) {
             console.log(error)
-            toastSuccess("Hubo un error");
+            toastError("Hubo un error");
 
         }
     }
@@ -99,6 +99,7 @@ export const putProduct = (values:any, file?:any) => {
             dispatch(startLoading());
             const {data} = await mymarketApi.put(`product/update/${product._id}`, formData);
             dispatch(updateProduct({product: data}));
+            dispatch(toogleModalProductActions({type:''}));
             toastSuccess("Producto actualizado correctamente");
 
         } catch (error) {

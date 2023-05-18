@@ -8,6 +8,7 @@ import { toogleDrawer } from '../../../store/slices/ui/uiSlice';
 import { logout } from '../../../store/slices/auth/authSlice';
 import { RolesEnum } from '../../../enums';
 import { Cart } from '../..';
+import logo from '../../../assets/Logo.png';
 
 
 export const AppBar = () => {
@@ -25,21 +26,26 @@ export const AppBar = () => {
         <Box sx={{flexGrow: 1}}>
             <AppBarMui color='primary'   elevation={2} position="static">
                 <Container maxWidth="xl">
-                    <Toolbar sx={{display: "flex"}}>
+                    <Toolbar >
                         <Box display={"flex"} flexGrow={1} alignItems={"center"}>
 
 
-                            <Link to={user?.roles.includes(RolesEnum.USER) ? "/home" : "/dashboard"} style={{textDecoration: 'none'}}>
-                                <Typography variant="h4"   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 28, md: 36}}}>
-                                    MyMarket
-                                </Typography>
+                        <Link to={user?.roles.includes(RolesEnum.USER) ? "/home" : "/dashboard"} style={{textDecoration: 'none'}}>
+                                <IconButton>
+                                    <img src={logo} alt="logo app" style={{width: "50px", color:"white", filter: "invert(100%)"}}/>
+                                    <Typography marginLeft={2} variant="h4"    color="white"  sx={{ flexGrow:1, fontSize:{xs: 28, md: 36}}}>
+                                        MyMarket
+                                    </Typography>
+                                </IconButton>
+
+
                             </Link>
                         </Box>
                         {
                             user?.roles.includes(RolesEnum.USER) && (
-                            <Box  display={"flex"} flexGrow={{xs:"0",md:"1"}} alignItems={"center"}>
+                            <Box  display={{xs:"none",sm:"flex",  md:"flex"}} flexGrow={{xs:"1",md:"1"}} alignItems={"center"}>
                                 <LocationOnIcon sx={{display:{xs:"none", md:"flex"}}} htmlColor='rgb(235, 0, 20)'/>
-                                <Typography variant="h5" display={{xs:"none", sm:"flex"}}   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
+                                <Typography variant="h5" display={{xs:"none", sm:"none",md:"flex"}}   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
                                     Dirección del usuario
                                 </Typography>
                                 <Cart/>
@@ -48,14 +54,14 @@ export const AppBar = () => {
 
 
 
-                        <Box sx={{flexGrow: 0}} display={"flex"} alignItems={"center"}>
-                            <Typography visibility={{xs:"hidden",md:"visible"}} textTransform={"capitalize"} variant='h6'>{user?.username}</Typography>
+                        <Box sx={{flexGrow: 0}} display={"flex"} alignItems={"center"} >
+                            <Typography display={{xs:"none",sm:"flex"}} textTransform={"capitalize"} variant='h6'>{user?.username}</Typography>
                             <Tooltip title="Perfil">
                                 <IconButton>
                                     <Avatar />
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip  title="Salir">
+                            <Tooltip  title="Salir" sx={{display:{xs:"none",sm:"flex"}}}>
                                 <IconButton  onClick={handleLogout}>
                                     <LogoutIcon  sx={{color:"white", fontSize:{xs:32,md:42}}}/>
                                 </IconButton>

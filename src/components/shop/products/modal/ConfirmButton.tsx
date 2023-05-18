@@ -3,7 +3,8 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Button, CircularProgress, Dialog, DialogActions, DialogTitle } from '@mui/material';
-import { useAppSelector } from '../../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { toogleModalProductActions } from '../../../../store/slices/product/productSlice';
 
 interface Props {
     handleSubmit:(e?: React.FormEvent<HTMLFormElement> | undefined) => void;
@@ -16,7 +17,7 @@ export const ConfirmButton = ({handleSubmit}:Props) => {
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
+    const dispatch = useAppDispatch();
 
 
 

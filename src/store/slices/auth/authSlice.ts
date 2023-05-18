@@ -37,6 +37,7 @@ export const authSlice = createSlice({
             state.user = null;
             state.token = "";
             localStorage.removeItem("token");
+            localStorage.removeItem("cart");
             return state;
         },
         setError: (state, action) =>{

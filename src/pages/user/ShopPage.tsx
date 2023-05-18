@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import { useParams } from "react-router-dom"
-import {Box, Typography} from '@mui/material'
+import {Box, CircularProgress, Typography} from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getProductByShopUSer } from '../../store/slices/product/thunk';
 import { ProductsContainer } from '../../components';
@@ -11,7 +11,7 @@ const ShopPage = () => {
 
     const dispatch = useAppDispatch();
     const {shopId} = useParams();
-    const {products} = useAppSelector(state => state.product);
+    const {products, loadingProducts} = useAppSelector(state => state.product);
 
 
     useEffect(() => {
@@ -21,15 +21,21 @@ const ShopPage = () => {
 
     return (
         <Box>
-            {
-
-                <>
 
                         {
-                            products.length === 0 ?
+                            loadingProducts && (
+                                <Box display={"flex"} justifyContent={"center"}>
+                                    <CircularProgress />
+
+                                </Box>
+                            )
+                        }
+
+                        {
+                            !loadingProducts && products.length === 0 ?
                             (
                                 <Typography>Esta tienda no tiene productos</Typography>
-                            ):
+                            ): !loadingProducts &&
                             (
                                 <>
                                     <Typography marginBottom={7} fontSize={32}>Productos de la tienda: 
@@ -38,8 +44,6 @@ const ShopPage = () => {
                                 </>
                             )
                         }
-                </>
-            }
 
         </Box>
     )

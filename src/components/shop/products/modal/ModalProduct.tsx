@@ -46,9 +46,9 @@ export const ModalProduct = () => {
 
     const validationSchemaAdd = Yup.object({
         title: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(20, "No debe tener más de 20 caracteres").required("Este campo es obligatorio"),
-        description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(50, "No debe tener más de 50 caracteres").required("Este campo es obligatorio"),
+        description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(50, "No debe tener más de 50 caracteres"),
         price: Yup.number().typeError("El precio debe ser un número").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
-        stock: Yup.number().typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
+        stock: Yup.number().integer("El stock debe ser un número entero").typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
     })
 
 
@@ -63,7 +63,7 @@ export const ModalProduct = () => {
         title: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(20, "No debe tener más de 20 caracteres").required("Este campo es obligatorio"),
         description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(70, "No debe tener más de 50 caracteres"),
         price: Yup.number().typeError("El precio debe ser un número").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
-        stock: Yup.number().typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
+        stock: Yup.number().integer("El stock debe ser un número entero").typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
     })
 
 
@@ -80,6 +80,7 @@ export const ModalProduct = () => {
     }
 
     const handleSubmitAction = (values: any, resetForm:any) => {
+
         if(selectedFile === null && isOpenModalProductActions.type === "add"){
             setAlerta({msg:"Por favor seleccione una imagen", error: true})
             setTimeout(() => {
@@ -120,7 +121,7 @@ export const ModalProduct = () => {
                     }
                 >
                     {
-                        ({handleSubmit}) => (
+                        ({handleSubmit, values}) => (
                             <Form>
                                 <Box   width={{xs:"100%",sm:"400px"}} display={"flex"} flexDirection={"column"} gap={2}>
 
@@ -144,7 +145,7 @@ export const ModalProduct = () => {
                                     </Box>
 
                                     <MyTextInput label='Nombre del producto' name='title' />
-                                    <MyTextInput label='Precio' name='price'/>
+                                    <MyTextInput label={`Precio: ${Number(values.price).toLocaleString("es-CL",{style: 'currency',currency: "clp"})}`} name='price'/>
                                     <MyTextInput label='Stock' name='stock'/>
 
                                     {/* <textarea onChange={handleChange} placeholder='Descripción del producto' name="description" id="" cols={30} rows={10}></textarea>
