@@ -12,24 +12,29 @@ import { setCart } from "../store/slices/cart/cartSlice";
 
 
 
+
 const HomePageLayout = () => {
-    const token = localStorage.getItem("token");
     const dispatch = useAppDispatch();
     const {user} = useAppSelector(state => state.auth);
     const {cart } = useAppSelector(state => state.cart);
 
     const navigate = useNavigate();
 
+    const tokenStorage = localStorage.getItem("token");
 
 
     useEffect(()=>{
-        if(!token) return navigate("/");
-        dispatch(getUserByToken());
-    },[])
+        if(!tokenStorage) return navigate("/");
+        // if(!user && token) {
 
-    useEffect(()=>{
-        if(!user) return navigate("/");
-    },[])
+        if(!user) {
+            dispatch(getUserByToken());
+        }  
+
+        // }
+    },[navigate, dispatch])
+
+
 
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.USER)) return navigate("/");

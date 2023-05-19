@@ -12,7 +12,7 @@ import { RolesEnum } from "../enums";
 
 
 const ShopLayout = () => {
-    const token = localStorage.getItem("token");
+    const tokenStorage = localStorage.getItem("token");
     const dispatch = useAppDispatch();
     const {user} = useAppSelector(state => state.auth);
 
@@ -21,13 +21,17 @@ const ShopLayout = () => {
 
 
     useEffect(()=>{
-        if(!token) return navigate("/");
-        dispatch(getUserByToken());
-    },[token])
+        console.log("!")
+        if(!tokenStorage) return navigate("/");
+        // if(!user && token) {
 
-    useEffect(()=>{
-        if(!user) return navigate("/");
-    },[])
+        if(!user) {
+            dispatch(getUserByToken());
+        }  
+
+        // }
+    },[navigate, dispatch])
+
 
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.SHOP)) return navigate("/");

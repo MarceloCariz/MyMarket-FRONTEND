@@ -3,6 +3,7 @@ import mymarketApi from "../../../api/mymarketApi";
 import { toastError } from "../../../components/ui";
 import { AuthI, LoginI } from "../../../interfaces/auth";
 import { logout, setError, setUser, startLogin } from "./authSlice";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -40,6 +41,7 @@ export const SignIn = ({email, password}:LoginI) => {
 export const getUserByToken = () => {
     return async(dispatch:any, getState:any)=>{
         
+
         let token = localStorage.getItem("token");
         // let token = getState.auth.token;
         if(!token) return;
