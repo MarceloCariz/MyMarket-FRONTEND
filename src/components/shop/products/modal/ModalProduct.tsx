@@ -148,12 +148,6 @@ export const ModalProduct = () => {
                                     <MyTextInput label={`Precio: ${Number(values.price).toLocaleString("es-CL",{style: 'currency',currency: "clp"})}`} name='price'/>
                                     <MyTextInput label='Stock' name='stock'/>
 
-                                    {/* <textarea onChange={handleChange} placeholder='Descripción del producto' name="description" id="" cols={30} rows={10}></textarea>
-                                    {
-                                        errors.description && (
-                                            <Typography className='error'>{errors.description}</Typography>
-                                        )
-                                    } */}
                                     <MyTextArea style={{minHeight: "60px"}} name='description' placeholder='Descripción del producto'  />
 
                                     <ConfirmButton handleSubmit={handleSubmit}/>

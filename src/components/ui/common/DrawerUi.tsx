@@ -24,7 +24,7 @@ export const DrawerUi = () => {
                 <Typography component={"h2"} fontSize={32} textAlign="center" fontWeight={"semibold"}>Menú</Typography>
 
 
-                <Box display={"flex"}   height={"90vh"}>
+                <Box display={"flex"}   height={"70vh"}>
                                         {/* {
                         role === "administrador" ?
                         <DrawerOptionsAdmin/>    :
