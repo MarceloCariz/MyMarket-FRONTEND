@@ -21,9 +21,7 @@ export const ShopProductContainer = () => {
     useEffect(() => {
         if(!user) return;
         dispatch(getProductByShop())
-        console.log(products)
-    }, [user])
-
+    }, [user]);
 
 
     return (

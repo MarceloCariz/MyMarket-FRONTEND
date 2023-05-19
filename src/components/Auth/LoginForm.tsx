@@ -35,7 +35,7 @@ export const LoginForm = () => {
 
     
     return (
-        <Box width={{md:"500px"}} sx={{backgroundColor: "white"}} borderRadius={3} boxShadow={10} gap={5} paddingY={5} paddingX={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+        <Box width={{md:"500px"}}  sx={{backgroundColor: "white"}} borderRadius={3} boxShadow={10} gap={5} paddingY={5} paddingX={5} display={"flex"} flexDirection={"column"} alignItems={"center"}>
             <Box display={"flex"} flexDirection={"column"} alignItems={"center"} gap={2} justifyContent={"center"} >
                 <img src={logo} alt="Logo app"  className='logo'/>
                 <Typography variant="h4">Inicio de Sesión</Typography>
@@ -53,13 +53,13 @@ export const LoginForm = () => {
                 {
                     ({errors, handleChange}) => (
                         <Form>
-                            <Box width={{xs:"auto",sm:"300px", md:"400px"}} display={"flex"} flexDirection={"column"} gap={20}>
+                            <Box height={{xs:"auto",sm:"300px"}} width={{xs:"auto",sm:"300px", md:"400px"}} display={"flex"} flexDirection={"column"} gap={20}>
                                 <FormControl>
                                     <Box display={"flex"} flexDirection={"column"} gap={6}>
                                         <MyTextInput error={errors.email ? true : false} name="email" label="Correo electrónico" placeholder="ejemplo@correo.com"/>
                                         {/* <MyTextInput error={errors.password ? true : false} name="password" label="Contraseña" type="password"/> */}
                                         
-                                        
+                                        <Box display={"flex"} flexDirection="column">
                                         <OutlinedInput
                                             id="standard-adornment-password"
                                             name='password'
@@ -68,29 +68,23 @@ export const LoginForm = () => {
                                             onChange={handleChange}
                                             type={showPassword ? 'text' : 'password'}
                                             endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                aria-label="toggle password visibility"
-                                                color={errors.password ? "error" : "default"}
-                                                onClick={() => setShowPassword(!showPassword)}
-                                                >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    color={errors.password ? "error" : "default"}
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
                                             }
                                         />
-                                        {
-                                            errors.password && (
-                                                <Typography component={"span"} className='error'>
-                                                    {errors.password}
-                                                </Typography>
-                                            )
-                                        }
 
+                                        <Typography height={10} visibility={errors.password ? "visible" : "hidden"}  component={"span"} className='error'>
+                                            {errors.password}
+                                        </Typography>
 
-
-
-
+                                    </Box>
 
                                         <Button fullWidth variant="contained" type="submit">
                                             Iniciar Sesión

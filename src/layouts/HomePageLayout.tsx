@@ -27,6 +27,10 @@ const HomePageLayout = () => {
         dispatch(getUserByToken());
     },[])
 
+    useEffect(()=>{
+        if(!user) return navigate("/");
+    },[])
+
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.USER)) return navigate("/");
     }, [user])

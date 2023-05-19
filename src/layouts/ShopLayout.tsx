@@ -25,6 +25,10 @@ const ShopLayout = () => {
         dispatch(getUserByToken());
     },[token])
 
+    useEffect(()=>{
+        if(!user) return navigate("/");
+    },[])
+
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.SHOP)) return navigate("/");
     }, [user])
