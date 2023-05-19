@@ -30,10 +30,10 @@ export const AppBar = () => {
                         <Box display={"flex"} flexGrow={1} alignItems={"center"}>
 
 
-                        <Link to={user?.roles.includes(RolesEnum.USER) ? "/home" : "/dashboard"} style={{textDecoration: 'none'}}>
+                        <Link to={user?.roles.includes(RolesEnum.USER) ? "/home" : (user?.roles.includes(RolesEnum.SHOP) ? "/shop" : "/")} style={{textDecoration: 'none'}}>
                                 <IconButton>
                                     <img src={logo} alt="logo app" style={{width: "50px", color:"white", filter: "invert(100%)"}}/>
-                                    <Typography marginLeft={2} variant="h4"    color="white"  sx={{ flexGrow:1, fontSize:{xs: 28, md: 36}}}>
+                                    <Typography display={{xs:"none",sm:"flex",  md:"flex"}} marginLeft={2} variant="h4"    color="white"  sx={{ flexGrow:1, fontSize:{xs: 28, md: 36}}}>
                                         MyMarket
                                     </Typography>
                                 </IconButton>
@@ -43,7 +43,7 @@ export const AppBar = () => {
                         </Box>
                         {
                             user?.roles.includes(RolesEnum.USER) && (
-                            <Box  display={{xs:"none",sm:"flex",  md:"flex"}} flexGrow={{xs:"1",md:"1"}} alignItems={"center"}>
+                            <Box  display={"flex"} flexGrow={{xs:"1",md:"1"}} alignItems={"center"}>
                                 <LocationOnIcon sx={{display:{xs:"none", md:"flex"}}} htmlColor='rgb(235, 0, 20)'/>
                                 <Typography variant="h5" display={{xs:"none", sm:"none",md:"flex"}}   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
                                     Dirección del usuario

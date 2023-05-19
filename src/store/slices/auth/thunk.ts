@@ -60,7 +60,7 @@ export const getUserByToken = () => {
             dispatch(setUser({user, token: data.token}))
         }catch(error){
             const err = error as AxiosError;
-            if(err.response?.status === 400){
+            if(err.response?.status === 400 || err.response?.status === 403){
                 dispatch(logout());
             }
         }
