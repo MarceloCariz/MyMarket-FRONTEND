@@ -10,4 +10,8 @@ export interface ProductI {
     stock:       number;
     shopName?:    string;
     shopId?:      string;
+    shop:{
+        id:string,
+        shopName: string,
+    }
 }

@@ -1,12 +1,13 @@
+import { FormikHelpers, FormikState } from "formik";
 import mymarketApi from "../../../api/mymarketApi";
 import { toastError, toastSuccess } from "../../../components";
 import { ProductI } from "../../../interfaces";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 import { addProduct, removeProduct, setProducts, startLoading, startLoadingProducts, toogleModalProductActions, updateProduct } from "./productSlice";
 
 
 export const getProducts = () => {
-    return async(dispatch:any)=>{ 
+    return async(dispatch:AppDispatch)=>{ 
         try {
             dispatch(startLoadingProducts());
             
@@ -20,7 +21,7 @@ export const getProducts = () => {
 }
 
 export const getProductByShop = () => {
-    return async(dispatch:any, getState:()=> RootState)=>{ 
+    return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
         try {
             const {user} = getState().auth;
             
@@ -33,12 +34,12 @@ export const getProductByShop = () => {
 }
 
 export const getProductByShopUSer = (shopId: string) => {
-    return async(dispatch:any)=>{ 
+    return async(dispatch:AppDispatch)=>{ 
         try {
             dispatch(startLoadingProducts());
             const {data} = await mymarketApi(`product/shop/${shopId}`);
 
-            const products = data.map((p:any) => ({...p, shopName: p.shop["shopName"]}))
+            const products = data.map((p:ProductI) => ({...p, shopName: p.shop.shopName}))
 
             dispatch(setProducts({products}));
 
@@ -50,14 +51,16 @@ export const getProductByShopUSer = (shopId: string) => {
 
 
 
-export const createProduct = (values:any, file:any, resetForm: any) => {
-    return async(dispatch:any, getState:()=> RootState)=>{ 
+export const createProduct = (values:ProductI, file:File, resetForm: (nextState?: Partial<FormikState<ProductI>> | undefined) => void) => {
+    return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
         try {
             const {user} = getState().auth;
+
             const product:ProductI = values;
             
             const formData = new FormData();
             if(!user?.uid) return;
+
             formData.append("title", product.title);
             formData.append("description", product.description);
             formData.append("price", product.price.toString());
@@ -80,8 +83,8 @@ export const createProduct = (values:any, file:any, resetForm: any) => {
     
 }
 
-export const putProduct = (values:any, file?:any) => {
-    return async(dispatch:any, getState:()=> RootState)=>{ 
+export const putProduct = (values:ProductI, file?:File) => {
+    return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
         try {
             const {user} = getState().auth;
             const product:ProductI = values;
@@ -116,7 +119,7 @@ export const putProduct = (values:any, file?:any) => {
 
 
 export const deleteProduct = () => {
-    return async(dispatch:any, getState:()=> RootState)=>{ 
+    return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
         try {
             
             const {activeProduct} = getState().product;

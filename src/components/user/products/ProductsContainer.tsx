@@ -1,12 +1,14 @@
 import { Box, Grid } from "@mui/material"
 import { useAppSelector } from "../../../hooks"
 import { ListProductItem } from "./ListProductItem";
+import { $CombinedState } from "@reduxjs/toolkit";
 
 
 
 export const ProductsContainer = () => {
 
     const {products} = useAppSelector(state => state.product);
+
 
     return (
         <Box>

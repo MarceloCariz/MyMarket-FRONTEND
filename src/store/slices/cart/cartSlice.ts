@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { ProductI } from "../../../interfaces"
 
 
-interface cartState {
+export interface cartState {
     cart: ProductI[],
 }
 

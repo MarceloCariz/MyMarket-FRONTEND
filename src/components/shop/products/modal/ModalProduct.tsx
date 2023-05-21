@@ -1,6 +1,6 @@
 import {useState, useMemo, useEffect} from 'react'
 import {Modal, Box, Typography, Button, Input, CircularProgress} from '@mui/material'
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers, FormikState } from 'formik';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import * as Yup from 'yup';
 import { ProductI } from '../../../../interfaces';
@@ -9,14 +9,15 @@ import { setActiveProduct, toogleModalProductActions } from '../../../../store/s
 import { createProduct, putProduct } from '../../../../store/slices/product/thunk';
 import { MyTextArea , MyTextInput} from '../../../formik';
 import { ConfirmButton } from './ConfirmButton';
+import { ActionModalProductsEnum } from '../../../../enums';
 
 
 
 
 export const ModalProduct = () => {
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [alerta, setAlerta] = useState({msg: '', error: false});
-    const [imagenInfo, setImagenInfo] = useState<any>(null);
+    const [imagenInfo, setImagenInfo] = useState< string | null | undefined  >(null);
 
 
     const dispatch = useAppDispatch();
@@ -27,8 +28,8 @@ export const ModalProduct = () => {
 
     useEffect(() => {
         if(isOpenModalProductActions.type === "edit"){
+
             setImagenInfo(activeProduct?.imgUrl)
-            console.log(activeProduct?.imgUrl)
             return;
         }
         setImagenInfo(null)
@@ -52,11 +53,11 @@ export const ModalProduct = () => {
     })
 
 
-    const initialValuesEdit = {
-        title: activeProduct?.title,
-        description: activeProduct?.description,
-        price: activeProduct?.price,
-        stock: activeProduct?.stock,
+    const initialValuesEdit:ProductI = {
+        title: activeProduct?.title || "",
+        description: activeProduct?.description || "",
+        price: activeProduct?.price || 0,
+        stock: activeProduct?.stock || 0,
     }
 
     const validationSchemaEdit = Yup.object({
@@ -67,28 +68,30 @@ export const ModalProduct = () => {
     })
 
 
-    const onChangeInpuFile = (e:any) => {
-        const imagen = e.target.files[0];
+    const onChangeInpuFile = (e:  React.ChangeEvent<HTMLInputElement>) => {
+        const imagen = e.target.files?.[0];
+        if(!imagen) return;
         setSelectedFile(imagen);
         const reader = new FileReader();
         reader.onload = (e) =>{
-            const { result }:any = e.target;
+            const result = e.target?.result ? e.target.result.toString() : "";
             setImagenInfo(result);
         }
         reader.readAsDataURL(imagen);
     
     }
 
-    const handleSubmitAction = (values: any, resetForm:any) => {
+    const handleSubmitAction = (values: ProductI, resetForm: (nextState?: Partial<FormikState<ProductI>> | undefined) => void) => {
 
-        if(selectedFile === null && isOpenModalProductActions.type === "add"){
+        if(selectedFile === null && isOpenModalProductActions.type === ActionModalProductsEnum.ADD){
             setAlerta({msg:"Por favor seleccione una imagen", error: true})
             setTimeout(() => {
                 setAlerta({msg: '', error: false}); 
             }, 2000);
             return;
         }
-        if(isOpenModalProductActions.type === "add"){
+        
+        if(isOpenModalProductActions.type === ActionModalProductsEnum.ADD && selectedFile !== null){
             dispatch(createProduct(values, selectedFile, resetForm))
             setSelectedFile(null);
             setImagenInfo(null);
@@ -109,31 +112,33 @@ export const ModalProduct = () => {
                 dispatch(setActiveProduct({product:null}));
             }}
         >
-            <Box sx={{backgroundColor: "white"}} borderRadius={3} paddingX={4} paddingY={2}  display={"flex"} flexDirection={"column"} gap={5}>
+            <Box sx={{backgroundColor: "white"}} borderRadius={3} paddingX={4} paddingY={4}  display={"flex"} flexDirection={"column"} gap={5}>
                 <Typography  variant='h4' textAlign={"center"} >
-                    {isOpenModalProductActions.type === "add" ? "Agregar Producto" : "Editar Producto"} 
+                    {isOpenModalProductActions.type === ActionModalProductsEnum.ADD ? "Agregar Producto" : "Editar Producto"} 
                 </Typography>
                 <Formik
-                    initialValues={isOpenModalProductActions.type === "add" ? initialValuesAdd : initialValuesEdit}
-                    onSubmit={(values, {resetForm}) => handleSubmitAction(values, resetForm)}
+                    initialValues={isOpenModalProductActions.type === ActionModalProductsEnum.ADD ? initialValuesAdd : initialValuesEdit}
+                    onSubmit={(values:ProductI, {resetForm}) => handleSubmitAction(values, resetForm)}
                     validationSchema={
-                        isOpenModalProductActions.type === "add" ? validationSchemaAdd : validationSchemaEdit
+                        isOpenModalProductActions.type === ActionModalProductsEnum.ADD ? validationSchemaAdd : validationSchemaEdit
                     }
                 >
                     {
                         ({handleSubmit, values}) => (
                             <Form>
-                                <Box   width={{xs:"100%",sm:"400px"}} display={"flex"} flexDirection={"column"} gap={2}>
+                                <Box  width={{xs:"100%",sm:"400px"}} display={"flex"} flexDirection={"column"} gap={2}>
 
                                     <Box display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"}>
                                         {imagenInfo !== null &&(
-                                            <img src={
-                                                imagenInfo
-                                            } alt="imagen" width={"100"} />)
+                                            <img src={imagenInfo} alt="imagen" width={"100"} />)
                                         }
+
                                         <Typography  sx={{display:"flex", alignItems:"center", cursor:"pointer"}}  component={"label"}  htmlFor="file">
+                                            
                                             <AddPhotoAlternateIcon fontSize='large'/>
-                                            {selectedFile !== null ? "Actualizar imagen" : "Haz clic aquí para subir tu imagen"}</Typography>
+                                            {selectedFile !== null ? "Actualizar imagen" : "Haz clic aquí para subir tu imagen"}
+                                        
+                                        </Typography>
 
                                         
                                         <Input  style={{display: 'none'}} id="file"  type="file" onChange={onChangeInpuFile} />
@@ -142,6 +147,7 @@ export const ModalProduct = () => {
                                                 <Typography className='error'>{alerta.msg}</Typography>
                                             )
                                         }
+
                                     </Box>
 
                                     <MyTextInput label='Nombre del producto' name='title' />
@@ -161,3 +167,7 @@ export const ModalProduct = () => {
         </Modal>
     )
 }
+
+// https://mymarketm.netlify.app/shop   
+// usuario: usuario@correo.com  pass: 12345678   
+// shop: shop@correo.com  pass: 12345678
