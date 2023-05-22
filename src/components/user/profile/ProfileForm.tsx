@@ -53,17 +53,17 @@ export const ProfileForm = () => {
 
     const validationSchema = Yup.object({
             name: Yup.string().min(3, "Debe tener un minimo de 3 caracteres")
-            .max(20,"No debe superar los 20 caracteres").optional(),
+            .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').optional(),
 
             lastName: Yup.string().min(3, "Debe tener un minimo de 3 caracteres")
-            .max(20,"No debe superar los 20 caracteres").optional(),
+            .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').optional(),
 
             address: Yup.string().min(5, "Debe tener un minimo de 3 caracteres")
             .max(30,"No debe superar los 20 caracteres").optional(),
     })
     
+    
     const handleSubmit = (values: UserProfileI) => {
-
         dispatch(updateProfileUser(values));
     }
 
