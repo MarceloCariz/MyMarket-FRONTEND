@@ -1,5 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom'
-import { Box , Typography, IconButton, AppBar as AppBarMui, Toolbar,Container, Tooltip, Avatar} from '@mui/material';
+import { Box , Typography, IconButton, AppBar as AppBarMui, Toolbar,Container, Tooltip} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -9,6 +9,7 @@ import { logout } from '../../../store/slices/auth/authSlice';
 import { RolesEnum } from '../../../enums';
 import { Cart } from '../..';
 import logo from '../../../assets/Logo.png';
+import { Profile } from './profile';
 
 
 export const AppBar = () => {
@@ -56,11 +57,9 @@ export const AppBar = () => {
 
                         <Box sx={{flexGrow: 0}} display={"flex"} alignItems={"center"} >
                             <Typography display={{xs:"none",sm:"flex"}} textTransform={"capitalize"} variant='h6'>{user?.username}</Typography>
-                            <Tooltip title="Perfil">
-                                <IconButton>
-                                    <Avatar />
-                                </IconButton>
-                            </Tooltip>
+                            {/* <Tooltip title="Perfil"> */}
+                                    <Profile/>
+                            {/* </Tooltip> */}
                             <Tooltip  title="Salir" sx={{display:{xs:"none",sm:"flex"}}}>
                                 <IconButton  onClick={handleLogout}>
                                     <LogoutIcon  sx={{color:"white", fontSize:{xs:32,md:42}}}/>

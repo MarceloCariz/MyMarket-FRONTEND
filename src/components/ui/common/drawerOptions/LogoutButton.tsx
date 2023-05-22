@@ -21,7 +21,7 @@ export const LogoutButton = () => {
     return (
         <>
             <IconButton  onClick={handleLogout}>
-                <LogoutIcon  sx={{color:"red", fontSize:{xs:32,md:42}}}/>
+                <LogoutIcon  sx={{color:"red", fontSize:{xs:32}}}/>
                 <Typography variant="subtitle1" color={"black"}>Cerrar sesión</Typography>
             </IconButton>
         </>

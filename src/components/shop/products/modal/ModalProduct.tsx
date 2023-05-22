@@ -97,7 +97,7 @@ export const ModalProduct = () => {
             setImagenInfo(null);
             return;
         }
-        if(activeProduct?.imgUrl !== imagenInfo){
+        if(activeProduct?.imgUrl !== imagenInfo && selectedFile ){
             dispatch(putProduct({...values, _id: product?._id}, selectedFile))
             return
         }
