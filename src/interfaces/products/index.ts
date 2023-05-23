@@ -14,4 +14,5 @@ export interface ProductI {
         id:string,
         shopName: string,
     }
+    categoryName?: string;
 }
