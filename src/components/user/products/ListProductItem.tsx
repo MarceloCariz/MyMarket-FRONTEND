@@ -22,7 +22,7 @@ export const ListProductItem = ({product}:Props) => {
 
                 <CardHeader   sx={{backgroundColor:'rgb(50, 77, 112)', color: 'white', display: params ? "none" : "flex" }} 
                     title={shopName}
-                    action={<IconButton onClick={() => navigate(`shop/${shopId}`)} sx={{pb:1}}>
+                    action={<IconButton onClick={() => navigate(`/home/shop/${shopId}`)} sx={{pb:1}}>
                                 <Tooltip title="Ir a la tienda">
                                     <StorefrontIcon htmlColor="white"/>
                                 </Tooltip>

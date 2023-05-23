@@ -39,7 +39,7 @@ export const getProductByShopUSer = (shopId: string) => {
             dispatch(startLoadingProducts());
             const {data} = await mymarketApi(`product/shop/${shopId}`);
 
-            const products = data.map((p:ProductI) => ({...p, shopName: p.shop.shopName}))
+            const products = data.map((p:ProductI) => ({...p, shopName: p.shop?.shopName}))
 
             dispatch(setProducts({products}));
 
@@ -129,6 +129,19 @@ export const deleteProduct = () => {
             toastSuccess(data.message);
             dispatch(removeProduct({id: activeProduct?._id}));
 
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+export const searchProduct = (searchValue: string) => {
+    return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
+        try {
+            const {data} = await mymarketApi(`product/search?q=${searchValue}`);
+
+            dispatch(setProducts({products: data}));
         } catch (error) {
             console.log(error)
         }

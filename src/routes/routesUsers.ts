@@ -1,5 +1,5 @@
 import { LazyExoticComponent } from "react";
-import {Home, Profile, ShopPage} from "../pages/user/";
+import {Home, Profile, Search, ShopPage} from "../pages/user/";
 
 
 type JSXComponent = () =>  JSX.Element;
@@ -32,6 +32,12 @@ export const routesUsers: RoutesI[] = [
         to: '',
         Component: ShopPage,
         name: "ShopPage"
+    },
+    {
+        path: 'search',
+        to: '',
+        Component: Search,
+        name: 'SearchPage'
     }
 
 ]

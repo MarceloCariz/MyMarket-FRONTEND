@@ -68,8 +68,6 @@ export const productSlice = createSlice({
             state.activeProduct = null;
             return state;
         },
-
-
     }
 });
 
