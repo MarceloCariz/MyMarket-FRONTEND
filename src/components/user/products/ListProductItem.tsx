@@ -22,7 +22,7 @@ export const ListProductItem = ({product}:Props) => {
 
                 <CardHeader   sx={{backgroundColor:'rgb(50, 77, 112)', color: 'white', display: params ? "none" : "flex" }} 
                     title={shopName}
-                    action={<IconButton onClick={() => navigate(`shop/${shopId}`)} sx={{pb:1}}>
+                    action={<IconButton onClick={() => navigate(`/home/shop/${shopId}`)} sx={{pb:1}}>
                                 <Tooltip title="Ir a la tienda">
                                     <StorefrontIcon htmlColor="white"/>
                                 </Tooltip>
@@ -42,13 +42,9 @@ export const ListProductItem = ({product}:Props) => {
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {price.toLocaleString("es-CL",{style: 'currency',currency: "clp"})} </Typography>
                         </Typography>
 
-                        {
-                            categoryName && (
-                                <Typography variant="h5">Categoría: 
-                                    <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {categoryName} </Typography>
-                                </Typography>
-                            )
-                        }
+                        <Typography variant="h5">Categoría: 
+                                <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {categoryName} </Typography>
+                        </Typography>
 
                     </Box>
                     <Box marginTop={2} display={"flex"} justifyContent={"center"}>

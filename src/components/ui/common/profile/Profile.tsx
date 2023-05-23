@@ -12,6 +12,7 @@ export const Profile = () => {
 
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const [open, setOpen] = useState(false);
+    const [target, setTarget] = useState('');
     const [placement, setPlacement] = useState<PopperPlacementType>();
 
     let timer : ReturnType<typeof setTimeout>;
@@ -24,33 +25,38 @@ export const Profile = () => {
             setAnchorEl(event.currentTarget);
             setOpen((prev) => placement !== newPlacement || !prev);
             setPlacement(newPlacement);
-            // handleMouseLeave();
+            handleMouseEnter("button")
     };
 
 
     const handleMouseLeave = () => {
-        // Iniciar un temporizador para cerrar el elemento después de 10 segundos
-        const timer = setTimeout(() => setOpen(false), 5000);
+        timer = setTimeout(() => setOpen(false), 2000);
     };
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter = (target: string) => {
+        setTarget(target);
+        setOpen(true);
         clearTimeout(timer);
     };
+
+    useEffect(() => {
+        clearTimeout(timer);
+    },[target])
     
       // Limpiar el temporizador cuando el componente se desmonta
     useEffect(() => {
             return () => {
                 clearTimeout(timer);
             };
-    }, []);
+    }, [target]);
 
 
     return (
         <Box>
-            <IconButton onClick={handleClick('bottom-end')}  >
+            <IconButton onMouseEnter={handleClick('bottom-end')} onMouseLeave={handleMouseLeave} >
                 <Avatar />
             </IconButton>
-            <Popper open={open} onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave} anchorEl={anchorEl} placement={placement} transition>
+            <Popper open={open} onMouseEnter={()=> handleMouseEnter('popper')}  onMouseLeave={handleMouseLeave} anchorEl={anchorEl} placement={placement} transition>
             {({ TransitionProps }) => (
                 <Fade {...TransitionProps} timeout={350}>
                     <Paper>
