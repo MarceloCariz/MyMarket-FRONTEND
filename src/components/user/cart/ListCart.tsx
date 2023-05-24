@@ -45,13 +45,12 @@ export const ListCart = () => {
 
                             </Grid>
 
-                            <Grid item xs={4} sm={8} > 
-                                <ContainerCenter gap={{xs:2,sm:2, md:10}} flexDirection={{xs:"column",sm:"row"}}>
+                            <GridCenter item xs={4} sm={8} gap={{xs:2,sm:0, md:6}} flexDirection={{xs:"column",sm:"row"}}> 
 
                                     <OptionsTittle  variant='body1'>{product.title}</OptionsTittle>
                                     <OptionsTittle  variant='body1'>{getPriceFormatted(product.price)}</OptionsTittle>
 
-                                    <ContainerCenter width={{xs: "150px", sm:"120px"}} >
+                                    <ContainerCenter width={{xs: "150px", sm:"130px"}} >
 
                                         <IconButton onClick={() => HandleRemoveProduct(product)}>
                                             <RemoveCircleIcon color='error'/>
@@ -62,9 +61,8 @@ export const ListCart = () => {
                                         </IconButton>
                                     </ContainerCenter>
                                 
-                                </ContainerCenter>
 
-                            </Grid>
+                            </GridCenter>
                             <GridCenter item sm={2}  > 
                             
                                 <OptionsTittle variant='subtitle1' display={{xs:"flex", sm:"block"}} gap={2} alignItems={{xs:"center", md:"start"}}>
@@ -91,7 +89,7 @@ export const ListCart = () => {
 export const GridCenter = styled(Grid)`
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    align-items: center;
 `;
 
 export const OptionsTittle = styled(Typography)`

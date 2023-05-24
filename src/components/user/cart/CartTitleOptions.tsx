@@ -1,24 +1,24 @@
 import { Box, Grid, Typography } from '@mui/material'
-import { OptionsTittle } from './ListCart'
+import { GridCenter, OptionsTittle } from './ListCart'
 import { styled } from 'styled-components'
 
 
 export const CartTitleOptions = () => {
     return (
-        <Grid container  sx={{mb: 2}} display={{xs:"none",sm:"flex"}}   > 
-            <Grid item  sm={3} md={2}> 
-                <OptionTitle >Imagen</OptionTitle>
+        <Grid container spacing={2}  sx={{mb: 2}} display={{xs:"none",sm:"flex"}}   > 
+            <Grid item   sm={2}> 
+                <OptionsTittle textAlign={"center"} width={"120px"} >Imagen</OptionsTittle>
             </Grid>
-            <Grid item  sm={6} md={8}> 
-                <Box display={"flex"} gap={10}  flexDirection="row">
-                    <OptionsTittle>Nombre</OptionsTittle>
+            <GridCenter item  sm={8}> 
+                <Box display={"flex"} gap={{sm:0, md:6}}  flexDirection="row">
+                    <OptionsTittle >Nombre</OptionsTittle>
                     <OptionsTittle>Precio</OptionsTittle>
-                    <OptionsTittle>Cantidad</OptionsTittle>
+                    <OptionsTittle width={{sm:"100px",md:"120px"}}>Cantidad</OptionsTittle>
 
                 </Box>
-            </Grid>
-            <Grid item sm={3} md={2} > 
-                <OptionsTittle marginLeft={{sm:2, md:0}} width={"auto"} variant='subtitle1'>Total</OptionsTittle>
+            </GridCenter>
+            <Grid item sm={2} > 
+                <OptionsTittle marginRight={5} width={"auto"} variant='subtitle1'>Total</OptionsTittle>
             </Grid>
 
         </Grid>
@@ -26,6 +26,3 @@ export const CartTitleOptions = () => {
 }
 
 
-const OptionTitle = styled(Typography)`
-    width: 'auto'
-`;
