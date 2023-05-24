@@ -1,7 +1,6 @@
-import {useEffect} from 'react'
 import {Button} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch} from '../../../hooks';
 import { addToCart } from '../../../store/slices/cart/cartSlice';
 import { ProductI } from '../../../interfaces';
 
@@ -13,7 +12,6 @@ interface Props {
 export const AddToCartButton = ({product}:Props) => {
 
     const dispatch = useAppDispatch();
-    const {cart} = useAppSelector(state => state.cart);
 
     const handleAddToCart = () => {
         dispatch(addToCart({product: {...product, quantity: +1}}))

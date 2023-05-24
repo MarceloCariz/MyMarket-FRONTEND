@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, IconButton, Tooltip, Typography, Button, CardMedia } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, IconButton, Tooltip, Typography,  CardMedia } from "@mui/material";
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { ProductI } from "../../../interfaces"
 import { AddToCartButton } from "./AddToCartButton";

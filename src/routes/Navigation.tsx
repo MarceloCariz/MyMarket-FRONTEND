@@ -3,8 +3,6 @@ import { BrowserRouter, Routes , Route} from 'react-router-dom';
 import {  routesUsers } from './routesUsers'
 import { AuthPageLayout, HomePageLayout } from '../layouts'
 import { routesNoAuthorization } from './routesNoAuthorization'
-import { routesAdmin } from './routesAdmin'
-import { AdminLayout } from '../layouts/AdminLayout'
 import { routesShop } from './routesShop';
 import { ShopLayout } from '../layouts/ShopLayout';
 import ErrorPage from '../pages/ErrorPage';

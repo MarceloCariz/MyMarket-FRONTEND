@@ -4,11 +4,10 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHook"
 import { ToastContainer } from "react-toastify";
 import {Container, Box} from "@mui/material";
 import { getUserByToken } from "../store/slices/auth/thunk";
-
-import 'react-toastify/dist/ReactToastify.css';
 import { AppBar, DrawerUi } from "../components";
 import { RolesEnum } from "../enums";
 import { setCart } from "../store/slices/cart/cartSlice";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -25,13 +24,11 @@ const HomePageLayout = () => {
 
     useEffect(()=>{
         if(!tokenStorage) return navigate("/");
-        // if(!user && token) {
 
         if(!user) {
             dispatch(getUserByToken());
         }  
 
-        // }
     },[])
 
 

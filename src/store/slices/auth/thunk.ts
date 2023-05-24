@@ -68,17 +68,5 @@ export const getUserByToken = () => {
     }
 }
 
-// Cuales son los estados de git *
-// Para que sirven los tags *
-// Que son los hooks * .git  
-// que es el gitignore *
-//silencios *
-
-
-// cual es el proceso completo de git 
-// como fusiono ramas  // 
-// Como elimino una rama  // git branch -D nombre rama framciscat / amylovelace
-// que es el git rebase  // 
-// 
 
 

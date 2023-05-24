@@ -1,10 +1,8 @@
 import {useState} from 'react';
-import { IconButton, Input, InputAdornment } from '@mui/material';
+import { IconButton, Input } from '@mui/material';
 import {  ClearOutlined, SearchOutlined} from '@mui/icons-material';
-import {  Theme } from '@mui/material/styles';
 import { styled } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { searchProduct } from '../../../store/slices/product/thunk';
 import { useNavigate } from 'react-router-dom';
 import { toogleSearch } from '../../../store/slices/ui/uiSlice';
 
@@ -20,7 +18,6 @@ export const SearchBar = () => {
 
     const handleOnSearchTerm = () => {
         if(searchTerm.trim().length === 0) return;
-        // dispatch(searchProduct(searchTerm));
         navigate(`search?q=${searchTerm}`)
 
     }

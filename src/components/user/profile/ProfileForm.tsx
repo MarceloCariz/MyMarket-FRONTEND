@@ -31,15 +31,7 @@ export const ProfileForm = () => {
         dispatch(getProfileUser());
     }, [user]);
 
-    // useEffect(() => {
-    //     if(profile){
-    //         setinitialValues({
-    //             name: profile.name,
-    //             lastName: profile.lastName,
-    //             // address: profile.address,
-    //         })
-    //     }
-    // },[])
+
 
 
     const initialValues: UserProfileI = {

@@ -1,4 +1,4 @@
-import { Box, Card, CardContent,  Typography, Button, CardMedia } from "@mui/material";
+import { Box, Card, CardContent,  Typography,  CardMedia } from "@mui/material";
 import { ProductI } from "../../../interfaces"
 import { DeleteButton, UpdateButton } from "./ActionButtons";
 import { useAppDispatch } from "../../../hooks";

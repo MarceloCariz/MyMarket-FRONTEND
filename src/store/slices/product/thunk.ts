@@ -1,4 +1,4 @@
-import { FormikHelpers, FormikState } from "formik";
+import {  FormikState } from "formik";
 import mymarketApi from "../../../api/mymarketApi";
 import { toastError, toastSuccess } from "../../../components";
 import { ProductI } from "../../../interfaces";
@@ -94,7 +94,6 @@ export const putProduct = (values:ProductI, file?:File) => {
             formData.append("description", product.description);
             formData.append("price", product.price.toString());
             formData.append("stock", product.stock.toString());
-            // formData.append("shop", user?.uid);
             if(file){
                 formData.append("image", file)
             }

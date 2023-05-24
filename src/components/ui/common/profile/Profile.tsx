@@ -43,7 +43,7 @@ export const Profile = () => {
         clearTimeout(timer);
     },[target])
     
-      // Limpiar el temporizador cuando el componente se desmonta
+    // Limpiar el temporizador cuando el componente se desmonta
     useEffect(() => {
             return () => {
                 clearTimeout(timer);

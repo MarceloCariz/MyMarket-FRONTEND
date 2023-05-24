@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material"
+import { Box} from "@mui/material"
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -26,11 +26,7 @@ const AuthPageLayout = () => {
         if(user?.roles.includes(RolesEnum.USER)) return navigate("/home");
 
         if(user?.roles.includes(RolesEnum.SHOP)) return navigate("/shop");
-        // if(user?.role === "usuario"){
-        //     navigate("/home")
-        //     return;
-        // }
-        // if(!user?.role) return navigate("/");
+
     },[user]);
 
     return (

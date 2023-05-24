@@ -1,6 +1,6 @@
 import {useState, useMemo, useEffect} from 'react'
-import {Modal, Box, Typography, Button, Input, CircularProgress} from '@mui/material'
-import { Form, Formik, FormikHelpers, FormikState } from 'formik';
+import {Modal, Box, Typography, Input} from '@mui/material'
+import { Form, Formik,  FormikState } from 'formik';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import * as Yup from 'yup';
 import { ProductI } from '../../../../interfaces';
@@ -168,6 +168,3 @@ export const ModalProduct = () => {
     )
 }
 
-// https://mymarketm.netlify.app/shop   
-// usuario: usuario@correo.com  pass: 12345678   
-// shop: shop@correo.com  pass: 12345678

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { ProductsContainer } from '../../components'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation} from 'react-router-dom'
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { searchProduct } from '../../store/slices/product/thunk';
