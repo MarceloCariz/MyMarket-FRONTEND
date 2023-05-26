@@ -1,13 +1,13 @@
 import {useState, useMemo, useEffect} from 'react'
-import {Modal, Box, Typography, Input} from '@mui/material'
+import {Modal, Box, Typography, Input, MenuItem} from '@mui/material'
 import { Form, Formik,  FormikState } from 'formik';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import * as Yup from 'yup';
 import { ProductI } from '../../../../interfaces';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { setActiveProduct, toogleModalProductActions } from '../../../../store/slices/product/productSlice';
-import { createProduct, putProduct } from '../../../../store/slices/product/thunk';
-import { MyTextArea , MyTextInput} from '../../../formik';
+import { createProduct, getCategories, putProduct } from '../../../../store/slices/product/thunk';
+import { MySelect, MyTextArea , MyTextInput} from '../../../formik';
 import { ConfirmButton } from './ConfirmButton';
 import { ActionModalProductsEnum } from '../../../../enums';
 
@@ -22,25 +22,35 @@ export const ModalProduct = () => {
 
     const dispatch = useAppDispatch();
 
-    const {isOpenModalProductActions, activeProduct:product} = useAppSelector(state => state.product);
+    const {isOpenModalProductActions, activeProduct:product, categories} = useAppSelector(state => state.product);
 
     const activeProduct = useMemo(() =>  {return product} , [isOpenModalProductActions])
 
     useEffect(() => {
-        if(isOpenModalProductActions.type === "edit"){
+        dispatch(getCategories());
+        console.log(product)
+    },[])
 
+
+    useEffect(() => {
+        if(isOpenModalProductActions.type === "edit"){
             setImagenInfo(activeProduct?.imgUrl)
             return;
         }
-        setImagenInfo(null)
+        setImagenInfo(null);
     }, [activeProduct])
 
+
+    const getCategoriesIds = () => {
+        return categories.length > 0 ?  categories.map(({_id}) => _id) : [];
+    }
 
     const initialValuesAdd:ProductI = {
         title: "",
         description: "",
         price: 0,
         stock: 0,
+        category: "seleccione",
     }
 
 
@@ -50,6 +60,7 @@ export const ModalProduct = () => {
         description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(50, "No debe tener más de 50 caracteres"),
         price: Yup.number().typeError("El precio debe ser un número").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
         stock: Yup.number().integer("El stock debe ser un número entero").typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
+        category: Yup.string().oneOf(getCategoriesIds(), "Categoría incorrecta").required("Este campo es obligatorio"),
     })
 
 
@@ -58,6 +69,7 @@ export const ModalProduct = () => {
         description: activeProduct?.description || "",
         price: activeProduct?.price || 0,
         stock: activeProduct?.stock || 0,
+        category: activeProduct?.category || "",
     }
 
     const validationSchemaEdit = Yup.object({
@@ -65,6 +77,7 @@ export const ModalProduct = () => {
         description: Yup.string().min(3,"Debe ser de un mínimo de 3 caracteres").max(70, "No debe tener más de 50 caracteres"),
         price: Yup.number().typeError("El precio debe ser un número").positive("El precio debe ser positivo").required("Este campo es obligatorio"),
         stock: Yup.number().integer("El stock debe ser un número entero").typeError("El stock debe ser un número").positive("El stock debe ser positivo").required("Este campo es obligatorio"),
+        category: Yup.string().oneOf(getCategoriesIds(), "Categoría incorrecta").required("Este campo es obligatorio"),
     })
 
 
@@ -153,6 +166,17 @@ export const ModalProduct = () => {
                                     <MyTextInput label='Nombre del producto' name='title' />
                                     <MyTextInput label={`Precio: ${Number(values.price).toLocaleString("es-CL",{style: 'currency',currency: "clp"})}`} name='price'/>
                                     <MyTextInput label='Stock' name='stock'/>
+                                    
+                                    <MySelect label='Categoría' name='category' > 
+                                        <MenuItem value="seleccione">Seleccione una categoría</MenuItem>
+                                        {
+                                            categories.map(({categoryName, _id}) => (
+                                                <MenuItem key={_id} value={_id}>
+                                                    <Typography textTransform={"capitalize"}>{categoryName}</Typography>
+                                                </MenuItem>
+                                            ))
+                                        }
+                                    </MySelect>
 
                                     <MyTextArea style={{minHeight: "60px"}} name='description' placeholder='Descripción del producto'  />
 

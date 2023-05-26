@@ -13,4 +13,8 @@ export interface ProductI {
     shopName?:     string;
     shopId?:       string;
     categoryName?: string;
+    category: string;
 }
+
+
+
