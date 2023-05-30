@@ -11,13 +11,14 @@ export interface MapStateI {
     isLoadingPlaces: boolean;
     places: Feature[];
     marker: Marker | null;
-
+    isModalMapOpen: boolean;
 }
 
 const initialState:MapStateI = {
     isMapReady: false,
     isLoadingLocation: true,
     isLoadingPlaces: false,
+    isModalMapOpen: false,
     userAddress: '',
     places: [],
     marker: null
@@ -60,6 +61,10 @@ export const mapSlice = createSlice({
             state.isLoadingPlaces = false;
             return state;
         },
+        toogleModalMap: (state) => {
+            state.isModalMapOpen = !state.isModalMapOpen;
+            return state;
+        }
     }
 })
 
@@ -70,6 +75,7 @@ export const {
     setUserAddress,
     setPlaces,
     setMarker,
+    toogleModalMap,
     startLoadingMap,
     startLoadingPlaces
 } = mapSlice.actions;

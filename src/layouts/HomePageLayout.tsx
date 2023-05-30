@@ -8,6 +8,7 @@ import { AppBar, DrawerUi } from "../components";
 import { RolesEnum } from "../enums";
 import { setCart } from "../store/slices/cart/cartSlice";
 import 'react-toastify/dist/ReactToastify.css';
+import { getProfileUser } from "../store/slices/user/thunk";
 
 
 
@@ -31,11 +32,18 @@ const HomePageLayout = () => {
 
     },[])
 
+    useEffect(() => {
+        if(user){
+            dispatch(getProfileUser());
+        }
+    },[user])
 
 
     useEffect(() => {
         if(user && !user?.roles.includes(RolesEnum.USER)) return navigate("/");
     }, [user])
+
+
 
     useEffect(() => {
         const cartStorage = localStorage.getItem("cart");
@@ -49,22 +57,25 @@ const HomePageLayout = () => {
             <AppBar/>
             <DrawerUi/>
             <Container maxWidth={"xl"}  >
-            <Box marginTop={4}>
-            <ToastContainer
-                position="top-center"
-                autoClose={2500}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover={false}
-                theme="light"
-            />
-                <Outlet/>
-            </Box>
+                <Box marginTop={4}>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2500}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover={false}
+                    theme="light"
+                />
+                    <Outlet/>
+                </Box>
             </Container>
+            <Box marginTop={10}  height={20}>
+
+            </Box>
         </>
     )
 }

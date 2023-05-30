@@ -8,6 +8,7 @@ import {  MyTextInput } from "../../formik";
 import { CenterColumn, ContainerCenter } from "../../../styles/styles";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { getProfileUser, updateProfileUser } from '../../../store/slices/user/thunk';
+import { AddressInput } from '.';
 
 
 
@@ -37,7 +38,6 @@ export const ProfileForm = () => {
     const initialValues: UserProfileI = {
         name: profile?.name || "",
         lastName: profile?.lastName || "",
-        address: profile?.address || "",
     }
 
 
@@ -45,13 +45,12 @@ export const ProfileForm = () => {
 
     const validationSchema = Yup.object({
             name: Yup.string().min(3, "Debe tener un minimo de 3 caracteres")
-            .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').optional(),
+            .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').required("El nombre es requerido"),
 
             lastName: Yup.string().min(3, "Debe tener un minimo de 3 caracteres")
-            .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').optional(),
+            .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').required("El apellido es requerido"),
 
-            address: Yup.string().min(5, "Debe tener un minimo de 3 caracteres")
-            .max(30,"No debe superar los 20 caracteres").optional(),
+
     })
     
     
@@ -75,7 +74,13 @@ export const ProfileForm = () => {
                             <Container  boxShadow={2} padding={5} borderRadius={2}>
                                 <MyTextInput label="Nombre" name="name"/>
                                 <MyTextInput label="Apellido" name="lastName"/>
-                                <MyTextInput label="Direccíon" name="address"/>
+
+                                {/* <ContainerCenter>
+                                    <MyTextInput label="Direccíon" name="address" />
+                                    <MapIcon />
+                                </ContainerCenter> */}
+
+                                <AddressInput/>
 
                                 <Button variant='contained' color='success' type="submit">
                                     Guardar cambios

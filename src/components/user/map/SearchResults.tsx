@@ -1,22 +1,21 @@
-import { useState } from "react";
+import { Box, Button,  Divider,  Typography } from "@mui/material";
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { Feature } from "../../../interfaces";
-import { Box, Button, Typography } from "@mui/material";
 import { setMarker, setPlaces, setUserAddress, setUserLocation } from "../../../store/slices/map";
 import { Marker, Popup } from "mapbox-gl";
+import { CenterColumn } from "../../../styles/styles";
 
 
 
 export const SearchResults = () => {
 
-    const {places, isLoadingPlaces, userLocation, mapView} = useAppSelector(state => state.map);
+    const {places, isLoadingPlaces, mapView} = useAppSelector(state => state.map);
     const dispatch = useAppDispatch();
-    const [activePlaceId, setActivePlaceId] = useState('')
 
 
     const onPlaceClicked = (place: Feature) =>{
         const [lng, lat] = place.center;
-        setActivePlaceId(place.id);
         if(!mapView) return;
 
         mapView.flyTo({
@@ -44,19 +43,34 @@ export const SearchResults = () => {
     if(places.length === 0) return <></>;
 
     return (
-        <Box  position={"absolute"} height={"300px"} overflow={"scroll"} zIndex={2} sx={{backgroundColor: 'white'}} marginTop={2} className="list-group mt-3">
+        <ContainerResults className="scrollBar"   boxShadow={2} borderRadius={4} >
             {
             places.map( place => (
-                <Box  onClick={() => onPlaceClicked(place)} key={place.id}>
-                    <Typography>{place.text_es}</Typography>
-                    <Typography >
-                        {place.place_name_es}
-                    </Typography>
-                    <Button variant="contained" >Seleccionar</Button>
-                </Box>
+                <CenterColumn marginBottom={2} alignItems={"start"} gap={2}  onClick={() => onPlaceClicked(place)} key={place.id} >
+                    <Box>
+                        <Typography>{place.text_es}</Typography>
+                        <Typography >
+                            {place.place_name_es}
+                        </Typography>
+                        <Button  variant="contained" size="small">Ir a la dirección</Button>
+                        <Divider/>
+                    </Box>
+                </CenterColumn>
             ))
             }
-
-        </Box>
+        </ContainerResults>
     )
 }
+
+
+const ContainerResults = styled(Box)`
+    position: absolute;
+    height: 200px;
+    width: 500px;
+    overflow: scroll;
+    z-index: 2;
+    background-color: white;
+    margin-top: 3rem;
+    padding: 10px;
+    border-radius: 4;
+`

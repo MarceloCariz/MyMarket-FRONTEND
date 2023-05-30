@@ -9,12 +9,15 @@ import { setUserProfile } from "./userSlice";
 export const updateProfileUser = (values: UserProfileI) => {
     return async(dispatch:AppDispatch, getState: ()=>RootState)=>{
         try {
-            const {lastName, name, address, profileImg} = values;
+            const {lastName, name, address, profileImg, latitude, longitude} = values;
             const formData = new FormData();
-
+            if(latitude && longitude && address){
+                formData.append("latitude", latitude.toString());
+                formData.append("longitude", longitude.toString());
+                formData.append("address", address);
+            }
             formData.append("name", name);
             formData.append("lastName",lastName);
-            formData.append("address", address);
 
 
             const {data} = await mymarketApi.put("user/update/profile", formData);

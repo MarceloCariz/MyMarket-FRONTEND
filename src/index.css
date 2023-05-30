@@ -51,3 +51,14 @@ body{
 .scrollBar::-webkit-scrollbar-thumb:hover {
   background-color: #bbbbbb;
 }
+
+.black-placeholder{
+  color: black;
+  text-decoration: none;
+}
+
+.black-placeholder::-webkit-input-placeholder{
+  color: black !important;
+}
+
+

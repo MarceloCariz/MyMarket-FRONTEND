@@ -17,6 +17,9 @@ export const AppBar = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const {user} = useAppSelector(state => state.auth);
+
+    const {profile} = useAppSelector(state => state.user);
+
     const {isOpenSearch} = useAppSelector(state => state.ui);
 
 
@@ -54,7 +57,7 @@ export const AppBar = () => {
                                 <SearchBar/>
                                 <LocationOnIcon sx={{display:{xs:"none", md:"flex"}}} htmlColor='rgb(235, 0, 20)'/>
                                 <Typography variant="h5" display={{xs:"none", sm:"none",md:"flex"}}   color="white" component="div" sx={{ flexGrow: 1, fontSize:{xs: 20, md: 25}}}>
-                                    Dirección del usuario
+                                    {profile?.address ? profile.address.split(',')[0] : "Aun no hay dirección"}
                                 </Typography>
                                 {
                                     !isOpenSearch &&

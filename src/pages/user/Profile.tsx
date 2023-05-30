@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { MapView, ProfileForm } from "../../components"
+import { ModalMap, ProfileForm } from "../../components"
 
 
 
@@ -7,8 +7,8 @@ const Profile = () => {
 
     return (
         <Box>
-            {/* <ProfileForm/> */}
-            <MapView/>
+            <ModalMap/>
+            <ProfileForm/>
         </Box>
     )
 }

@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { setMap, setMarker, setUserLocation } from '../../../store/slices/map';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { CenterColumn } from '../../../styles/styles';
-import { Input } from '@mui/material';
 import { SearchInput } from '.';
 
 
@@ -15,10 +14,16 @@ export const MapView = () => {
 
     const dispatch = useAppDispatch();
     const {isLoadingLocation, userLocation} = useAppSelector(state => state.map);
+    const {profile} = useAppSelector(state => state.user);
 
     const mapDiv = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if(profile?.address){
+            const lnglat = [profile.longitude, profile.latitude];
+            dispatch(setUserLocation(lnglat));
+            return;
+        }
         getUserLocation().then(lnglat => (
             dispatch(setUserLocation(lnglat))
         ))
@@ -31,7 +36,7 @@ export const MapView = () => {
                 container: mapDiv.current!, // container ID
                 style: 'mapbox://styles/mapbox/dark-v10', // style URL
                 center: userLocation, // starting position [lng, lat]
-                zoom: 12 // starting zoom
+                zoom: 15 // starting zoom
             });
             const myLocationPopup = new Popup()
 
@@ -49,10 +54,8 @@ export const MapView = () => {
             <SearchInput/>
             <div ref={mapDiv}
                 style={{
-                    height: '400px',
-                    left: 0,
-                    top: 0,
-                    width: '700px',
+                    height: '300px',
+                    width: '600px',
                 }}
             >
             </div>
