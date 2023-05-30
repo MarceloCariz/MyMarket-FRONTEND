@@ -24,12 +24,12 @@ export const ListCart = () => {
     }
 
     return (
-        <Box  boxShadow={10} padding={4} borderRadius={6} >
+        <Box  boxShadow={10} padding={4} borderRadius={3} >
             <OptionsTittle textAlign={"left"} variant='h5' display={{xs:"flex",sm:"none"}}>Productos</OptionsTittle>
 
             <CartTitleOptions />
 
-            <Box maxHeight={"450px"} className="scrollBar" sx={{overflowY:"scroll", overflowX:"hidden"}} >
+            <Box maxHeight={"700px"} className="scrollBar" sx={{overflowY:"scroll", overflowX:"hidden"}} >
 
                 {
                     cart.map( (product) => (

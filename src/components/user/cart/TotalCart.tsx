@@ -18,7 +18,7 @@ export const TotalCart = () => {
     }
 
     return (
-        <CenterColumn height={"20%"} width={{xs:"auto", md:"350px"}} boxShadow={10} padding={4} borderRadius={6} >
+        <CenterColumn height={"20%"} width={{xs:"auto", md:"350px"}} boxShadow={10} padding={4} borderRadius={3} >
 
             <Box>
                 <Typography variant='subtitle1'>Items: {getTotalItems()} </Typography>  

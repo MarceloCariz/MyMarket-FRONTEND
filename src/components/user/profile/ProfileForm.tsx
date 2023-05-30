@@ -61,7 +61,7 @@ export const ProfileForm = () => {
 
 
     return (
-        <ContainerCenter >
+        <ContainerCenter>
             <Formik
                 onSubmit={(values) => handleSubmit(values)}
                 initialValues={initialValues}
@@ -72,7 +72,7 @@ export const ProfileForm = () => {
                     () => (
                         <Form>
                             <Typography variant="h5" textAlign={"center"}>Perfil</Typography>
-                            <Container>
+                            <Container  boxShadow={2} padding={5} borderRadius={2}>
                                 <MyTextInput label="Nombre" name="name"/>
                                 <MyTextInput label="Apellido" name="lastName"/>
                                 <MyTextInput label="Direccíon" name="address"/>
