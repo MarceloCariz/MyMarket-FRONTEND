@@ -1,17 +1,14 @@
-import {useEffect} from 'react'
 import { Box } from "@mui/material"
-import { ProfileForm } from "../../components"
-import { useAppDispatch } from '../../hooks'
-import { getProfileUser } from '../../store/slices/user/thunk'
+import { MapView, ProfileForm } from "../../components"
+
 
 
 const Profile = () => {
-    const dispatch = useAppDispatch();
-
 
     return (
         <Box>
-            <ProfileForm/>
+            {/* <ProfileForm/> */}
+            <MapView/>
         </Box>
     )
 }
