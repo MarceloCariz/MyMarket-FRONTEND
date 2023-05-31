@@ -1,4 +1,4 @@
-import { Box, Card, CardContent,  Typography, Button, CardMedia } from "@mui/material";
+import { Box, Card, CardContent,  Typography,  CardMedia } from "@mui/material";
 import { ProductI } from "../../../interfaces"
 import { DeleteButton, UpdateButton } from "./ActionButtons";
 import { useAppDispatch } from "../../../hooks";
@@ -12,7 +12,7 @@ interface Props {
 export const ListProductItem = ({product}:Props) => {
 
     const dispacth = useAppDispatch();
-    const {title,price, stock,  imgUrl} = product;
+    const {title,price, stock,  imgUrl, categoryName} = product;
 
 
     return (
@@ -30,6 +30,9 @@ export const ListProductItem = ({product}:Props) => {
                         </Typography>
                         <Typography variant="h5">Precio: 
                             <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {price.toLocaleString("es-CL",{style: 'currency',currency: "clp"})} </Typography>
+                        </Typography>
+                        <Typography variant="h5">Categoría: 
+                                <Typography color={"gray"} textTransform={"capitalize"} variant='h5' component={"span"}> {categoryName} </Typography>
                         </Typography>
                     </Box>
                     <Box marginTop={2}  display={"flex"} gap={2} justifyContent={"center"}>

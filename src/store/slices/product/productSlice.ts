@@ -1,9 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { ProductI } from '../../../interfaces'
+import { CategoryI, ProductI } from '../../../interfaces'
 import { ActionModalProductsEnum } from '../../../enums';
 
 export interface productState {
     products: ProductI[];
+    categories: CategoryI[];
     activeProduct: ProductI | null;
     isOpenModalProductActions:{active: boolean, type: ActionModalProductsEnum};
     loadingAction: boolean;
@@ -13,6 +14,7 @@ export interface productState {
 
 const initialState : productState  = {
     products: [],
+    categories: [],
     activeProduct: null,
     isOpenModalProductActions: {active: false, type: ActionModalProductsEnum.NONE},
     loadingAction: false,
@@ -26,6 +28,10 @@ export const productSlice = createSlice({
         setProducts: (state, action) => {
             state.products = action.payload.products;
             state.loadingProducts = false;
+            return state;
+        },
+        setCategories: (state, action) => {
+            state.categories = action.payload.categories;
             return state;
         },
         setActiveProduct: (state, action) => {
@@ -68,19 +74,18 @@ export const productSlice = createSlice({
             state.activeProduct = null;
             return state;
         },
-
-
     }
 });
 
 
 export const {
     setProducts,
+    setCategories,
     setActiveProduct,
     startLoading,
     startLoadingProducts,
-    toogleModalProductActions,
     //Functions
+    toogleModalProductActions,
     addProduct,
     updateProduct,
     removeProduct

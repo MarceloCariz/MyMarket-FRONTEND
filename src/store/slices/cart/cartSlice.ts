@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { ProductI } from "../../../interfaces"
+import { CartItem } from "../../../interfaces"
 
 
 export interface cartState {
-    cart: ProductI[],
+    cart: CartItem[],
 }
 
 
@@ -24,9 +24,51 @@ export const cartSlice = createSlice({
             return state;
         },
         addToCart: (state, action) => {
-            state.cart = [...state.cart, action.payload.product];
+            let product = action.payload.product;
+            const isExist = state.cart.find(({_id}) =>  _id === product._id);
+
+            if(isExist){
+                state.cart =  state.cart.map((cart) => { 
+                    if(cart._id ===  product._id){
+                        cart.quantity++;
+                        return cart;
+                    }
+                    return cart
+                });
+                localStorage.setItem("cart", JSON.stringify(state.cart));
+                return state;
+            }
+
+            state.cart = [...state.cart, product];
             localStorage.setItem("cart", JSON.stringify(state.cart));
             return state;
+        },
+        removeToCart: (state, action) => {
+            const product = action.payload.product;
+            const isExist = state.cart.find(({_id}) =>  _id === product._id);
+
+
+            if(isExist && isExist.quantity === 1){
+                state.cart = state.cart.filter(({_id}) =>  _id !== isExist._id);
+                localStorage.setItem("cart", JSON.stringify(state.cart));
+                return state;
+            }
+
+            if(isExist){
+                state.cart =  state.cart.map((cart) => { 
+                    if(cart._id ===  product._id){
+                        cart.quantity = cart.quantity - 1;
+                        return cart;
+                    }
+                    return cart
+                });
+                localStorage.setItem("cart", JSON.stringify(state.cart));
+                return state;
+            }
+
+
+            return state;
+
         }
     }
 });
@@ -34,5 +76,6 @@ export const cartSlice = createSlice({
 
 export const {
     setCart,
-    addToCart
+    addToCart,
+    removeToCart
 } = cartSlice.actions;

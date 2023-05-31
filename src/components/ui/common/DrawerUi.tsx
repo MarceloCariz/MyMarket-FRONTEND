@@ -1,9 +1,9 @@
 import { Drawer , Box, Typography} from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { toogleDrawer } from '../../../store/slices/ui/uiSlice';
-import { LogoutButton } from './drawerOptions';
-// import { DrawerOptionsAdmin } from './admin/DrawerOptionsAdmin';
-// import { DrawerOptionsUser } from './user/DrawerOptionsUser';
+import { DrawerOptionsUser, LogoutButton } from './drawerOptions';
+import { RolesEnum } from '../../../enums';
+
 
 
 export const DrawerUi = () => {
@@ -21,18 +21,16 @@ export const DrawerUi = () => {
             onClose={()=>dispatch(toogleDrawer())}
         >
             <Box sx={{ marginTop: "1rem"}} paddingX={8} >
-                <Typography component={"h2"} fontSize={32} textAlign="center" fontWeight={"semibold"}>Menú</Typography>
-
+                <Typography marginBottom={2} component={"h2"} fontSize={32} textAlign="center" fontWeight={"semibold"}>Menú</Typography>
+                {
+                    role?.includes(RolesEnum.USER) && (
+                        <DrawerOptionsUser/>
+                    )
+                }
 
                 <Box display={"flex"}   height={"70vh"}>
-                                        {/* {
-                        role === "administrador" ?
-                        <DrawerOptionsAdmin/>    :
-                        <DrawerOptionsUser/>
-                    } */}
                     <Box display={"flex"} alignItems={"flex-end"}>
                         <LogoutButton/>
-
                     </Box>
                 </Box>
 

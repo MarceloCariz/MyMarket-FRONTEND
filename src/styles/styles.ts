@@ -11,7 +11,7 @@ export const ContainerCenter = styled(Box)`
 export const CenterColumn = styled(Box) `
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 `;
 
 

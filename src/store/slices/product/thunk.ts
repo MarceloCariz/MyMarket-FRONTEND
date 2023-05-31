@@ -1,9 +1,9 @@
-import { FormikHelpers, FormikState } from "formik";
+import {  FormikState } from "formik";
 import mymarketApi from "../../../api/mymarketApi";
 import { toastError, toastSuccess } from "../../../components";
 import { ProductI } from "../../../interfaces";
 import { AppDispatch, RootState } from "../../store";
-import { addProduct, removeProduct, setProducts, startLoading, startLoadingProducts, toogleModalProductActions, updateProduct } from "./productSlice";
+import { addProduct, removeProduct, setCategories, setProducts, startLoading, startLoadingProducts, toogleModalProductActions, updateProduct } from "./productSlice";
 
 
 export const getProducts = () => {
@@ -14,6 +14,19 @@ export const getProducts = () => {
             const {data} = await mymarketApi('product/all');
 
             dispatch(setProducts({products: data}));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const getCategories = () => {
+    return async(dispatch:AppDispatch)=>{ 
+        try {
+            
+            const {data} = await mymarketApi('category');
+
+            dispatch(setCategories({categories: data}));
         } catch (error) {
             console.log(error);
         }
@@ -39,9 +52,8 @@ export const getProductByShopUSer = (shopId: string) => {
             dispatch(startLoadingProducts());
             const {data} = await mymarketApi(`product/shop/${shopId}`);
 
-            const products = data.map((p:ProductI) => ({...p, shopName: p.shop.shopName}))
 
-            dispatch(setProducts({products}));
+            dispatch(setProducts({products:data}));
 
         } catch (error) {
             console.log(error);
@@ -56,16 +68,17 @@ export const createProduct = (values:ProductI, file:File, resetForm: (nextState?
         try {
             const {user} = getState().auth;
 
-            const product:ProductI = values;
+            const {title, description, price, stock, category}  = values;
             
             const formData = new FormData();
             if(!user?.uid) return;
 
-            formData.append("title", product.title);
-            formData.append("description", product.description);
-            formData.append("price", product.price.toString());
-            formData.append("stock", product.stock.toString());
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("price", price.toString());
+            formData.append("stock", stock.toString());
             formData.append("shop", user?.uid);
+            formData.append("category", category );
             formData.append("image", file)
 
             dispatch(startLoading());
@@ -87,21 +100,21 @@ export const putProduct = (values:ProductI, file?:File) => {
     return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
         try {
             const {user} = getState().auth;
-            const product:ProductI = values;
+            const {title, description, price, stock, category, _id}  = values;
 
             const formData = new FormData();
             if(!user?.uid) return;
-            formData.append("title", product.title);
-            formData.append("description", product.description);
-            formData.append("price", product.price.toString());
-            formData.append("stock", product.stock.toString());
-            // formData.append("shop", user?.uid);
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("price", price.toString());
+            formData.append("stock", stock.toString());
+            formData.append("category", category);
             if(file){
                 formData.append("image", file)
             }
 
             dispatch(startLoading());
-            const {data} = await mymarketApi.put(`product/update/${product._id}`, formData);
+            const {data} = await mymarketApi.put(`product/update/${_id}`, formData);
             dispatch(updateProduct({product: data}));
             dispatch(toogleModalProductActions({type:''}));
             toastSuccess("Producto actualizado correctamente");
@@ -129,6 +142,19 @@ export const deleteProduct = () => {
             toastSuccess(data.message);
             dispatch(removeProduct({id: activeProduct?._id}));
 
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+export const searchProduct = (searchValue: string) => {
+    return async(dispatch:AppDispatch, getState:()=> RootState)=>{ 
+        try {
+            const {data} = await mymarketApi(`product/search?q=${searchValue}`);
+
+            dispatch(setProducts({products: data}));
         } catch (error) {
             console.log(error)
         }

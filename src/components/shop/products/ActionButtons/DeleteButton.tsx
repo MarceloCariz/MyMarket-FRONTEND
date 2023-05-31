@@ -1,15 +1,11 @@
 import {useState} from 'react'
 import {Button, Dialog, DialogActions, DialogTitle} from '@mui/material'
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { deleteProduct } from '../../../../store/slices/product/thunk';
 
 export const DeleteButton = () => {
     const [open, setOpen] = useState(false)
 
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const {activeProduct} = useAppSelector(state => state.product);
 

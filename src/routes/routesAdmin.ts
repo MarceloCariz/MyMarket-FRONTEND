@@ -1,5 +1,4 @@
-// import { Products } from "../pages/admin";
-// import {Users, Dashboard} from "../pages/admin/users/";
+
 import { RoutesI } from "./routesUsers";
 
 
