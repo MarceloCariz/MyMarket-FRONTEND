@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { UserProfileI } from "../../../interfaces/user";
 import {  MyTextInput } from "../../formik";
 import { CenterColumn, ContainerCenter } from "../../../styles/styles";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector, useLocation } from "../../../hooks";
 import { getProfileUser, updateProfileUser } from '../../../store/slices/user/thunk';
 import { AddressInput } from '.';
 
@@ -20,14 +20,12 @@ export const ProfileForm = () => {
     const {profile} = useAppSelector(state => state.user);
     const {user} = useAppSelector(state => state.auth);
 
+    const { permissionDenied, ActivateLocationClick} = useLocation()
 
     const dispatch = useAppDispatch();
 
 
-
-
     useEffect(() => {
-        console.log(profile)
         if(!user) return;
         dispatch(getProfileUser());
     }, [user]);
@@ -71,16 +69,20 @@ export const ProfileForm = () => {
                     () => (
                         <Form>
                             <Typography variant="h5" textAlign={"center"}>Perfil</Typography>
-                            <Container  boxShadow={2} padding={5} borderRadius={2}>
+                            <Container  boxShadow={4} padding={5} borderRadius={2}>
                                 <MyTextInput label="Nombre" name="name"/>
                                 <MyTextInput label="Apellido" name="lastName"/>
 
-                                {/* <ContainerCenter>
-                                    <MyTextInput label="Direccíon" name="address" />
-                                    <MapIcon />
-                                </ContainerCenter> */}
-
-                                <AddressInput/>
+                                {/*  TextField mapa */}
+                                {
+                                    permissionDenied ? (
+                                        <Button onClick={ActivateLocationClick}>
+                                            Active la ubicación para obtener su dirección
+                                        </Button>
+                                    ): (
+                                        <AddressInput/>
+                                    )
+                                }
 
                                 <Button variant='contained' color='success' type="submit">
                                     Guardar cambios
@@ -100,7 +102,7 @@ export const ProfileForm = () => {
 
 
 const Container = styled(CenterColumn)`
-    width: 300px;
+    width: 600px;
     gap: 2rem;
     margin-top: 1rem;
 `;

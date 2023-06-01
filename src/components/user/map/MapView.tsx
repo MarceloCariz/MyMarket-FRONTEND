@@ -30,7 +30,6 @@ export const MapView = () => {
     },[])
 
     useEffect(()=>{
-        console.log(userLocation)
         if(!isLoadingLocation){
             const map = new mapboxgl.Map({
                 container: mapDiv.current!, // container ID
