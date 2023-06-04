@@ -17,7 +17,7 @@ export const CartTitleOptions = () => {
 
                 </Box>
             </GridCenter>
-            <Grid item sm={2} > 
+            <Grid item sm={1} > 
                 <OptionsTittle marginRight={5} width={"auto"} variant='subtitle1'>Total</OptionsTittle>
             </Grid>
 
