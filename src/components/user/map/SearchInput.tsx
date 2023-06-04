@@ -7,7 +7,7 @@ import { ChangeEvent, useRef } from 'react';
 import { SearchResults } from '.';
 import { updateProfileUser } from '../../../store/slices/user/thunk';
 import { UserProfileI } from '../../../interfaces/user';
-import { userStateI } from '../../../store/slices/user/userSlice';
+
 
 export const SearchInput = () => {
 
@@ -30,6 +30,7 @@ export const SearchInput = () => {
                 proximity: userLocation?.join(',')
             }
         });
+        console.log(resp.data)
         dispatch(setPlaces(resp.data.features));
         return resp.data.features;
     }

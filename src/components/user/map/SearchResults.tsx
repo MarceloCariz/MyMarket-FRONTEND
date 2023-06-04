@@ -47,7 +47,7 @@ export const SearchResults = () => {
             {
             places.map( place => (
                 <CenterColumn marginBottom={2} alignItems={"start"} gap={2}  onClick={() => onPlaceClicked(place)} key={place.id} >
-                    <Box>
+                    <Box width={"100%"}>
                         <Typography>{place.text_es}</Typography>
                         <Typography >
                             {place.place_name_es}
@@ -61,6 +61,7 @@ export const SearchResults = () => {
         </ContainerResults>
     )
 }
+
 
 
 const ContainerResults = styled(Box)`

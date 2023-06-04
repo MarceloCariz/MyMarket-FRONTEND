@@ -47,8 +47,6 @@ export const ProfileForm = () => {
 
             lastName: Yup.string().min(3, "Debe tener un minimo de 3 caracteres")
             .max(20,"No debe superar los 20 caracteres").matches(/^[a-zA-Z]+$/, 'Solo se permiten letras').required("El apellido es requerido"),
-
-
     })
     
     
@@ -83,7 +81,6 @@ export const ProfileForm = () => {
                                         <AddressInput/>
                                     )
                                 }
-
                                 <Button variant='contained' color='success' type="submit">
                                     Guardar cambios
                                 </Button>

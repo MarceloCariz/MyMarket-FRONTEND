@@ -18,6 +18,8 @@ export const MapView = () => {
 
     const mapDiv = useRef<HTMLDivElement>(null);
 
+
+    
     useEffect(() => {
         if(profile?.address){
             const lnglat = [profile.longitude, profile.latitude];

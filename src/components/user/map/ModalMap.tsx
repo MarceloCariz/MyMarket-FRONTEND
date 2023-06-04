@@ -6,6 +6,8 @@ import { CenterColumn } from '../../../styles/styles';
 
 
 
+
+
 export const ModalMap = () => {
 
     const {isModalMapOpen} = useAppSelector(state => state.map);
