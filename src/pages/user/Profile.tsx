@@ -1,5 +1,6 @@
 import { Box } from "@mui/material"
-import { ModalMap, ProfileForm } from "../../components"
+import { ModalMap, ProfileContainer, ProfileForm } from "../../components"
+import { CenterColumn } from "../../styles/styles"
 
 
 
@@ -8,7 +9,12 @@ const Profile = () => {
     return (
         <Box>
             <ModalMap/>
-            <ProfileForm/>
+            <CenterColumn>
+                <ProfileContainer>
+                    <ProfileForm/>
+                </ProfileContainer>
+            </CenterColumn>
+
         </Box>
     )
 }

@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import {  Typography, Button } from "@mui/material";
+import {  Typography, Button, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import {styled} from 'styled-components'
 import * as Yup from 'yup';
@@ -66,11 +66,10 @@ export const ProfileForm = () => {
                 {
                     () => (
                         <Form>
-                            <Typography variant="h5" textAlign={"center"}>Perfil</Typography>
-                            <Container  boxShadow={4} padding={5} borderRadius={2}>
-                                <MyTextInput label="Nombre" name="name"/>
-                                <MyTextInput label="Apellido" name="lastName"/>
-
+                            <Typography variant="h5" textAlign={"center"}>Datos personales</Typography>
+                            <Container  boxShadow={1} padding={5} borderRadius={2}>
+                                <MyTextInput label="Nombre" name="name" fullWidth sx={{width:"400px"}}/>
+                                <MyTextInput label="Apellido" name="lastName" sx={{width:"400px"}}/>
                                 {/*  TextField mapa */}
                                 {
                                     permissionDenied ? (

@@ -22,28 +22,26 @@ const ShopPage = () => {
     return (
         <Box>
 
-                        {
-                            loadingProducts && (
-                                <Box display={"flex"} justifyContent={"center"}>
-                                    <CircularProgress />
-
-                                </Box>
-                            )
-                        }
-
-                        {
-                            !loadingProducts && products.length === 0 ?
-                            (
-                                <Typography>Esta tienda no tiene productos</Typography>
-                            ): !loadingProducts &&
-                            (
-                                <>
-                                    <Typography marginBottom={7} fontSize={32}>Productos de la tienda: 
-                                    {products[0].shopName ? products[0].shopName : ""}</Typography>
-                                    <ProductsContainer/>
-                                </>
-                            )
-                        }
+            {
+                loadingProducts && (
+                    <Box display={"flex"} justifyContent={"center"}>
+                        <CircularProgress />
+                    </Box>
+                )
+            }
+            {
+                !loadingProducts && products.length === 0 ?
+                (
+                    <Typography>Esta tienda no tiene productos</Typography>
+                ): !loadingProducts &&
+                (
+                    <>
+                        <Typography marginBottom={7} fontSize={32}>Productos de la tienda: {" "}
+                        {products[0].shopName ? products[0].shopName : ""}</Typography>
+                        <ProductsContainer/>
+                    </>
+                )
+            }
 
         </Box>
     )

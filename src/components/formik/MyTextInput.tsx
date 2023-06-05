@@ -1,11 +1,12 @@
 import { ErrorMessage, useField } from "formik";
-import { Box,  TextField, Typography } from "@mui/material";
+import { Box,  SxProps,  TextField, Typography } from "@mui/material";
 
 interface Props{
     label: string;
     name: string;
     type?: 'text' | 'email' | 'password';
     placeholder?: string;
+    sx?: SxProps;
     [x: string] : any;
 }
 

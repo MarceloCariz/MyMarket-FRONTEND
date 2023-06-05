@@ -23,6 +23,7 @@ export const AddressInput = () => {
                         opacity: 1,
                     },
                 },
+                width:"400px"
             }}
             endAdornment={
                 <IconButton onClick={()=> dispatch(toogleModalMap())}>
