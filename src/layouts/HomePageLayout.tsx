@@ -35,7 +35,7 @@ const HomePageLayout = () => {
         }  
 
     },[])
-    if(!tokenStorage && !user) return ;
+    if(!tokenStorage && !user)return (<h1>Unathorized</h1>);
 
     useEffect(() => {
         if(user){

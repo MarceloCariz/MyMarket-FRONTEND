@@ -29,7 +29,7 @@ const ShopLayout = () => {
 
     },[navigate, dispatch])
 
-    if(!tokenStorage && !user) return ;
+    if(!tokenStorage && !user) return (<h1>Unathorized</h1>);
 
 
     useEffect(() => {
