@@ -2,7 +2,9 @@ import axios from "axios";
 
 
 const mymarketApi = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL
+    baseURL: import.meta.env.VITE_BACKEND_URL,
+    withCredentials: true
+    
 });
 
 mymarketApi.interceptors.request.use((config) => {

@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { Outlet , useNavigate} from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHook"
 import { ToastContainer } from "react-toastify";
 import {Container, Box} from "@mui/material";
+import Cookie from 'js-cookie'
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getUserByToken } from "../store/slices/auth/thunk";
 import { AppBar, DrawerUi } from "../components";
 import { RolesEnum } from "../enums";
 import { setCart } from "../store/slices/cart/cartSlice";
-import 'react-toastify/dist/ReactToastify.css';
 import { getProfileUser } from "../store/slices/user/thunk";
+import 'react-toastify/dist/ReactToastify.css';
+import mymarketApi from "../api/mymarketApi";
+
 
 
 
@@ -16,7 +19,8 @@ import { getProfileUser } from "../store/slices/user/thunk";
 const HomePageLayout = () => {
     const dispatch = useAppDispatch();
     const {user} = useAppSelector(state => state.auth);
-    const {cart } = useAppSelector(state => state.cart);
+    const {cart} = useAppSelector(state => state.cart);
+
 
     const navigate = useNavigate();
 
@@ -31,6 +35,7 @@ const HomePageLayout = () => {
         }  
 
     },[])
+    if(!tokenStorage && !user) return ;
 
     useEffect(() => {
         if(user){
@@ -46,11 +51,30 @@ const HomePageLayout = () => {
 
 
     useEffect(() => {
-        const cartStorage = localStorage.getItem("cart");
-        if(cartStorage){
-            dispatch(setCart({cart: JSON.parse(cartStorage) } ));
+        if(!user?.uid) return;
+        try {
+            const getCookiesCart = async () => {
+                const {data} = await mymarketApi.get('/user/getcart');
+                // console.log(data)
+                dispatch(setCart({cart: data } ));
+            } 
+            getCookiesCart();
+        } catch (error) {
+            console.log(error)
+            dispatch(setCart({cart: [] } ));
+            
         }
-    },[])
+
+    },[user?.uid])
+
+    useEffect(()=> {
+        if(!user?.uid) return;
+        const setCookie = async() => {
+            await mymarketApi.post('/user/setcart',{cart:JSON.stringify(cart),uid: user?.uid} )
+        }
+        setCookie();
+
+    },[cart, user?.uid]);
 
     return (
         <> 

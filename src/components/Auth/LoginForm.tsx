@@ -20,8 +20,8 @@ export const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const dispatch = useAppDispatch();
-    // const {token, user} = useAppSelector(state => state.auth);
-    // const navigate = useNavigate();
+
+    
 
     const handleLogin = ({email, password}:LoginI) => {
         dispatch(SignIn({email: email.toLowerCase(), password}));
