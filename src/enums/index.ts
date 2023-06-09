@@ -11,3 +11,9 @@ export enum ActionModalProductsEnum {
     EDIT = "edit",
     NONE = "",
 }
+
+export enum ActionModalCategoryEnum {
+    ADD = "add",
+    EDIT = "edit",
+    NONE = "",
+}

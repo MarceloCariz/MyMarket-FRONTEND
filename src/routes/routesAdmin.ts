@@ -1,23 +1,24 @@
 
+import { Category, DashBoard } from "../pages/admin";
 import { RoutesI } from "./routesUsers";
 
 
 
 
 export const routesAdmin: RoutesI[] = [
-    // {
-    //     path: '',
-    //     to: '',
-    //     Component: Dashboard,
-    //     name: 'DashBoard',
-    //     index: true
-    // },
-    // {
-    //     path: 'users',
-    //     to: 'users',
-    //     Component: Users,
-    //     name: 'Users',
-    // },
+    {
+        path: '',
+        to: '',
+        Component: DashBoard,
+        name: 'DashBoard',
+        index: true
+    },
+    {
+        path: 'category',
+        to: 'category',
+        Component: Category,
+        name: 'Category',
+    },
     // {
     //     path: 'products',
     //     to: 'products',

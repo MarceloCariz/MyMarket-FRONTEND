@@ -1,7 +1,7 @@
 import { Drawer , Box, Typography} from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { toogleDrawer } from '../../../store/slices/ui/uiSlice';
-import { DrawerOptionsUser, LogoutButton } from './drawerOptions';
+import { DrawerOptionsAdmin, DrawerOptionsUser, LogoutButton } from './drawerOptions';
 import { RolesEnum } from '../../../enums';
 
 
@@ -25,6 +25,11 @@ export const DrawerUi = () => {
                 {
                     role?.includes(RolesEnum.USER) && (
                         <DrawerOptionsUser/>
+                    )
+                }
+                {
+                    role?.includes(RolesEnum.ADMIN) && (
+                        <DrawerOptionsAdmin/>
                     )
                 }
 

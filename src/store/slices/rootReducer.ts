@@ -8,8 +8,11 @@ import { cartState } from "./cart/cartSlice";
 import {UiState} from './ui/uiSlice'
 import { userSlice, userStateI } from "./user/userSlice";
 import { MapStateI, mapSlice } from "./map";
+import { adminSlice } from "./admin";
+import { AdminState } from "./admin/adminSlice";
 
 interface RootState {
+    admin: AdminState,
     auth: UserState,
     user: userStateI,
     product: productState,
@@ -19,6 +22,7 @@ interface RootState {
 }
 
 const appReducer = combineReducers({
+    admin: adminSlice.reducer,
     auth: authSlice.reducer,
     user: userSlice.reducer,
     product: productSlice.reducer,

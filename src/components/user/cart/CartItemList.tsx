@@ -18,20 +18,20 @@ interface Props {
 
 export const CartItemList = ({product}:Props) => {
 
-    const {_id, title, imgUrl, quantity, price}  = product;
+    const {_id, title, imgUrl, quantity, price, stock}  = product;
 
     const [quantityCart, setQuantityCart] = useState('');
 
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        console.log(quantity);
         setQuantityCart(quantity.toString())
     }, [quantity])
     
     const dispatch = useAppDispatch();
     
     const HandleAddProduct = () => {
+        if(product.quantity >= stock) return toastError("Cantidad máxma alcanzada")
         dispatch(addToCart({product}))
     }
 
@@ -43,6 +43,7 @@ export const CartItemList = ({product}:Props) => {
         dispatch(deleteProduct(_id));
     }
 
+    
     const onChangeQuantity = ( {target}: ChangeEvent<HTMLInputElement>) => {
         const newQuantity = Number(target.value);
         if(isNaN(newQuantity)) return toastError("Debe ser un número");
@@ -54,7 +55,12 @@ export const CartItemList = ({product}:Props) => {
             return;
         }
         timeoutRef.current && clearTimeout(timeoutRef.current);
-    
+        
+        if(newQuantity > stock){
+            toastError("Cantidad máxma alcanzada")
+            return;
+        }
+
         setQuantityCart(newQuantity.toString());
         dispatch(changeQuantityProduct({id: _id, quantity: newQuantity}));
     }

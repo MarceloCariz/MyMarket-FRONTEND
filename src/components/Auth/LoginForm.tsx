@@ -8,7 +8,7 @@ import { MyTextInput } from "../formik/MyTextInput";
 import { useAppDispatch} from "../../hooks/reduxHook";
 import { SignIn } from "../../store/slices/auth/thunk";
 import { LoginI } from "../../interfaces";
-import logo from '../../assets/Logo.png';
+import logo from '../../assets/Logo.png'; 
 
 
 

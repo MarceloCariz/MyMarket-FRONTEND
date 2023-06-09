@@ -27,6 +27,9 @@ const AuthPageLayout = () => {
 
         if(user?.roles.includes(RolesEnum.SHOP)) return navigate("/shop");
 
+        if(user?.roles.includes(RolesEnum.ADMIN)) return navigate("/dashboard");
+
+
     },[user]);
 
     return (

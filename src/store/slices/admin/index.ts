@@ -1,0 +1,1 @@
+export { adminSlice } from "./adminSlice";

@@ -20,7 +20,6 @@ const AdminLayout = () => {
     const navigate = useNavigate();
 
 
-
     useEffect(()=>{
         if(!token) return navigate("/");
         if(user && !user.roles.includes(RolesEnum.ADMIN)) return navigate("/home");
@@ -29,6 +28,7 @@ const AdminLayout = () => {
         }
     },[user])
 
+    if(!user) return (<h1>Unathorized</h1>)
 
 
     return (

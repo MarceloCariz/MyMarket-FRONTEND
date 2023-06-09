@@ -11,7 +11,7 @@ import { AppDispatch } from "../../store";
 export const SignIn = ({email, password}:LoginI) => {
     return async(dispatch:AppDispatch)=>{
         try {
-            const response = await mymarketApi.post('/auth/login', {email, password});
+            const response = await mymarketApi.post('/auth/login', {email: email.trim(), password});
             
             if(response.status === 401){
                 return toastError("Correo o contraseña incorrectos");

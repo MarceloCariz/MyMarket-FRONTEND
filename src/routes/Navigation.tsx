@@ -6,6 +6,8 @@ import { routesNoAuthorization } from './routesNoAuthorization'
 import { routesShop } from './routesShop';
 import { ShopLayout } from '../layouts/ShopLayout';
 import ErrorPage from '../pages/ErrorPage';
+import { routesAdmin } from './routesAdmin';
+import { AdminLayout } from '../layouts/AdminLayout';
 
 
 
@@ -59,11 +61,27 @@ export const Navigation = () => {
                             ))
                         }
                     </Route>
+
+                {/* Protegidas Admin */}
+                    <Route  path='/dashboard' element={<AdminLayout/>}>
+                        {
+                            routesAdmin.map( ({ path, Component , index }) => (
+                                <Route 
+                                    key={ path }
+                                    path={ path }
+                                    element={ <Component /> } 
+                                    index={index}
+                                />
+                            ))
+                        }
+                    </Route>
                     <Route path='*' element={<ErrorPage/>}/>
+
+
+
+
                 </Routes>
-
-
-
+                
 
             </BrowserRouter>
 

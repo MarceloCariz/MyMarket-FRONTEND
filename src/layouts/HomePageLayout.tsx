@@ -55,7 +55,6 @@ const HomePageLayout = () => {
         try {
             const getCookiesCart = async () => {
                 const {data} = await mymarketApi.get('/user/getcart');
-                // console.log(data)
                 dispatch(setCart({cart: data } ));
             } 
             getCookiesCart();
@@ -64,7 +63,6 @@ const HomePageLayout = () => {
             dispatch(setCart({cart: [] } ));
             
         }
-
     },[user?.uid])
 
     useEffect(()=> {
