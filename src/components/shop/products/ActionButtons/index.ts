@@ -1,3 +1,3 @@
-export { UpdateButton } from "./UpdateButton";
-export { AddButton } from "./AddButton";
-export { DeleteButton } from "./DeleteButton";
+export { UpdateButtonProduct } from './UpdateButton';
+export { AddButtonProduct } from './AddButton';
+export { DeleteButtonProduct } from './DeleteButton';

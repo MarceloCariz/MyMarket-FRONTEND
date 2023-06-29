@@ -1,1 +1,1 @@
-export { toastError, toastSuccess } from "./toatsNotifications";
+export { toastError, toastSuccess } from './toatsNotifications';

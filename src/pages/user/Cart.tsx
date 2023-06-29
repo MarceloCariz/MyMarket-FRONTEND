@@ -1,13 +1,12 @@
-import { ContainerCartList } from "../../components"
-import { CenterColumn } from "../../styles/styles"
-
+import { ContainerCartList } from '@/components';
+import { CenterColumn } from '@/styles';
 
 const Cart = () => {
-    return (
-        <CenterColumn>
-            <ContainerCartList/>
-        </CenterColumn>
-    )
-}
+  return (
+    <CenterColumn>
+      <ContainerCartList />
+    </CenterColumn>
+  );
+};
 
-export default Cart
+export default Cart;

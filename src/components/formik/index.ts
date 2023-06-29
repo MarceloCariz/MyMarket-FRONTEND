@@ -1,4 +1,4 @@
-export { MyTextArea } from "./MyTextArea";
+export { MyTextArea } from './MyTextArea';
 
-export { MyTextInput } from "./MyTextInput";
-export { MySelect } from "./MySelect";
+export { MyTextInput } from './MyTextInput';
+export { MySelect } from './MySelect';

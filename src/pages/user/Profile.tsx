@@ -1,22 +1,18 @@
-import { Box } from "@mui/material"
-import { ModalMap, ProfileContainer, ProfileForm } from "../../components"
-import { CenterColumn } from "../../styles/styles"
-
-
+import { Box } from '@mui/material';
+import { ModalMap, ProfileContainer, ProfileForm } from '@/components';
+import { CenterColumn } from '@/styles';
 
 const Profile = () => {
+  return (
+    <Box>
+      <ModalMap />
+      <CenterColumn>
+        <ProfileContainer>
+          <ProfileForm />
+        </ProfileContainer>
+      </CenterColumn>
+    </Box>
+  );
+};
 
-    return (
-        <Box>
-            <ModalMap/>
-            <CenterColumn>
-                <ProfileContainer>
-                    <ProfileForm/>
-                </ProfileContainer>
-            </CenterColumn>
-
-        </Box>
-    )
-}
-
-export default Profile
+export default Profile;

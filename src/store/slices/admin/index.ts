@@ -1,1 +1,2 @@
-export { adminSlice } from "./adminSlice";
+export * from './adminSlice';
+export * from './thunk';

@@ -1,6 +1,3 @@
-
-
-
 export const getPriceFormatted = (price: number) => {
-    return price.toLocaleString("es-CL",{style:"currency" ,currency:"clp"})
-}
+  return price.toLocaleString('es-CL', { style: 'currency', currency: 'clp' });
+};

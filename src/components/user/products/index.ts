@@ -1,3 +1,5 @@
-export { ProductsContainer } from "./ProductsContainer";
+export { AddToCartButton } from './AddToCartButton';
 
-export { ListProductItem } from "./ListProductItem";
+export { ProductsContainer } from './ProductsContainer';
+
+export { ListProductItem } from './ListProductItem';

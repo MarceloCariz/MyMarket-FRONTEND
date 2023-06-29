@@ -1,13 +1,11 @@
-import Login from "../pages/Login";
-import { RoutesI } from "./routesUsers";
-
-
+import { Login } from '@/pages';
+import { RoutesI } from '@/routes';
 
 export const routesNoAuthorization: RoutesI[] = [
-    {
-        path: '/',
-        to: '/',
-        Component: Login,
-        name: 'Login'
-    }
-]
+  {
+    path: '/',
+    to: '/',
+    Component: Login,
+    name: 'Login',
+  },
+];

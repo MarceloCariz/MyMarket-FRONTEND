@@ -1,3 +1,6 @@
-export { AuthPageLayout } from "./AuthLayout";
+export { AdminLayout } from './AdminLayout';
+export { ShopLayout } from './ShopLayout';
 
-export { HomePageLayout } from "./HomePageLayout";
+export { AuthPageLayout } from './AuthLayout';
+
+export { HomePageLayout } from './HomePageLayout';

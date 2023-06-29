@@ -1,1 +1,1 @@
-export { cartSlice } from "./cartSlice";
+export * from './cartSlice';

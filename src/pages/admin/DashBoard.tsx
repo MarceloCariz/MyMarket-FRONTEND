@@ -1,13 +1,11 @@
-import { Box, Typography } from '@mui/material'
-
-
+import { Box, Typography } from '@mui/material';
 
 const DashBoard = () => {
-    return (
-        <Box>
-            <Typography>DashBoard</Typography>
-        </Box>
-    )
-}
+  return (
+    <Box>
+      <Typography>DashBoard</Typography>
+    </Box>
+  );
+};
 
-export default DashBoard
+export default DashBoard;

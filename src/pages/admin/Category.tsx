@@ -1,26 +1,19 @@
-import { Box } from "@mui/material"
-import { CenterColumn } from "../../styles/styles"
-import { AddCategoryButton, ModalCategory, TableCategory } from "../../components"
-
-
-
-
+import { Box } from '@mui/material';
+import { CenterColumn } from '@/styles';
+import { AddCategoryButton, ModalCategory, TableCategory } from '@/components';
 
 const Category = () => {
-    return (
-        <Box marginTop={10} >
-            <ModalCategory/>
+  return (
+    <Box marginTop={10}>
+      <ModalCategory />
 
+      <CenterColumn gap={2}>
+        <AddCategoryButton />
 
-            <CenterColumn gap={2}>
+        <TableCategory />
+      </CenterColumn>
+    </Box>
+  );
+};
 
-                <AddCategoryButton/>
-
-                <TableCategory/>
-
-            </CenterColumn>
-        </Box>
-    )
-}
-
-export default Category
+export default Category;

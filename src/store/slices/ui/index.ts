@@ -1,1 +1,1 @@
-export { uiSlice } from "./uiSlice";
+export * from './uiSlice';

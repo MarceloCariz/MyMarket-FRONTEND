@@ -1,23 +1,21 @@
-import { ErrorMessage, useField } from "formik"
-import { Typography, TextareaAutosize} from '@mui/material';
+import { ErrorMessage, useField } from 'formik';
+import { Typography, TextareaAutosize } from '@mui/material';
 
-interface Props{
-    name: string;
-    placeholder?: string;
-    [x: string] : any;
+interface Props {
+  name: string;
+  placeholder?: string;
+  [x: string]: any;
 }
 
-export const MyTextArea = ({label, ...props}:Props) => {
+export const MyTextArea = ({ ...props }: Props) => {
+  const [field] = useField(props);
 
-    const [field] = useField(props);
-
-    return (
-        <>
-            <TextareaAutosize {...field} {...props}/>
-            <Typography color={"error"}>
-                <ErrorMessage name={props.name} component="span" className="error"/>
-            </Typography>
-
-        </>
-    )
-}
+  return (
+    <>
+      <TextareaAutosize {...field} {...props} />
+      <Typography color={'error'}>
+        <ErrorMessage name={props.name} component='span' className='error' />
+      </Typography>
+    </>
+  );
+};

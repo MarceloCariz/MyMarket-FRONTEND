@@ -1,1 +1,2 @@
-export { authSlice } from "./authSlice";
+export * from './authSlice';
+export * from './thunk';

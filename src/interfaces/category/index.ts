@@ -1,7 +1,4 @@
-
-
-
 export interface CategoryI {
-    _id?: string;
-    categoryName: string;
+  _id?: string;
+  categoryName: string;
 }
